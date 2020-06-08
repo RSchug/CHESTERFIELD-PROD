@@ -1,0 +1,199 @@
+{
+
+    "Fire/Fire Prevention/HAZMAT/NA": {
+      "WorkflowTaskUpdateAfter": [
+        {
+          "metadata": {
+            "description": "Record Automation",
+            "operators": {}
+          },
+          "preScript": "",
+          "criteria": {
+            "task": [
+              "Fire Safety Review"
+            ],
+            "status": [
+              "Not Approved"
+            ]
+          },
+          "action": {
+            "updateTask": [
+              {
+                "task": "Application Intake",
+                "status": "Awaiting Resubmittal"
+              }
+            ]
+          },
+          "postScript": ""
+        }
+      ]
+    },
+    "Fire/Fire Prevention/Special Event/NA": {
+      "WorkflowTaskUpdateAfter": [
+        {
+          "metadata": {
+            "description": "Record Automation",
+            "operators": {}
+          },
+          "preScript": "",
+          "criteria": {
+            "task": [
+              "Fire Safety Review"
+            ],
+            "status": [
+              "Not Approved"
+            ]
+          },
+          "action": {
+            "updateTask": [
+              {
+                "task": "Application Intake",
+                "status": "Awaiting Resubmittal"
+              }
+            ]
+          },
+          "postScript": ""
+        }
+      ]
+    },
+    "Fire/Fire Prevention/Flammable/NA": {
+      "WorkflowTaskUpdateAfter": [
+        {
+          "metadata": {
+            "description": "Record Automation",
+            "operators": {}
+          },
+          "preScript": "",
+          "criteria": {
+            "task": [
+              "Fire Safety Review"
+            ],
+            "status": [
+              "Not Approved"
+            ]
+          },
+          "action": {
+            "updateTask": [
+              {
+                "task": "Application Intake",
+                "status": "Awaiting Resubmittal"
+              }
+            ]
+          },
+          "postScript": ""
+        }
+      ]
+    },
+    "Fire/Fire Prevention/Marijuana/NA": {
+      "WorkflowTaskUpdateAfter": [
+        {
+          "metadata": {
+            "description": "Record Automation",
+            "operators": {}
+          },
+          "preScript": "",
+          "criteria": {
+            "task": [
+              "Fire Safety Review"
+            ],
+            "status": [
+              "Not Approved"
+            ]
+          },
+          "action": {
+            "updateTask": [
+              {
+                "task": "Application Intake",
+                "status": "Awaiting Resubmittal"
+              }
+            ]
+          },
+          "postScript": ""
+        }
+      ]
+    },
+    "Fire/Fire Prevention/Same Day/NA": {
+      "WorkflowTaskUpdateAfter": [
+        {
+          "metadata": {
+            "description": "Record Automation",
+            "operators": {}
+          },
+          "preScript": "",
+          "criteria": {
+            "task": [
+              "Fire Safety Review"
+            ],
+            "status": [
+              "Not Approved"
+            ]
+          },
+          "action": {
+            "updateTask": [
+              {
+                "task": "Application Intake",
+                "status": "Awaiting Resubmittal"
+              }
+            ]
+          },
+          "postScript": ""
+        }
+      ]
+    },
+    "Fire/Fire Prevention/General/NA": {
+      "WorkflowTaskUpdateAfter": [
+        {
+          "metadata": {
+            "description": "Record Automation",
+            "operators": {}
+          },
+          "preScript": "",
+          "criteria": {
+            "task": [
+              "Fire Safety Review"
+            ],
+            "status": [
+              "Not Approved"
+            ]
+          },
+          "action": {
+            "updateTask": [
+              {
+                "task": "Application Intake",
+                "status": "Awaiting Resubmittal"
+              }
+            ]
+          },
+          "postScript": ""
+        }
+      ]
+    },
+    "Fire/Fire Prevention/High Pile/NA": {
+      "WorkflowTaskUpdateAfter": [
+        {
+          "metadata": {
+            "description": "Record Automation",
+            "operators": {}
+          },
+          "preScript": "",
+          "criteria": {
+            "task": [
+              "Fire Safety Review"
+            ],
+            "status": [
+              "Not Approved"
+            ]
+          },
+          "action": {
+            "updateTask": [
+              {
+                "task": "Application Intake",
+                "status": "Awaiting Resubmittal"
+              }
+            ]
+          },
+          "postScript": ""
+        }
+      ]
+    }
+  }

@@ -1,0 +1,50 @@
+{
+  "ConvertToRealCAPAfter": {
+    "StandardScripts": [
+      "STDBASE_REQUIRED_DOCUMENTS",
+    ]
+  },
+  "ApplicationSubmitAfter": {
+    "StandardScripts": [
+      "STDBASE_RECORD_AUTOMATION",
+    ]
+  },
+  "WorkflowTaskUpdateBefore": {
+    "StandardScripts": [
+      "STDBASE_RECORD_VALIDATION"
+    ]
+  },
+  "ApplicationSpecificInfoUpdateAfter": {
+    "StandardScripts": []
+  },
+  "WorkflowTaskUpdateAfter": {
+    "StandardScripts": [
+      "STDBASE_RECORD_AUTOMATION",
+      "STDBASE_SEND_CONTACT_EMAILS"
+    ]
+  },
+  "Pageflow": {
+    "StandardScripts": [
+      "STDBASE_REQUIRED_DOCUMENTS",
+    ]
+  },
+  "ApplicationSubmitBefore": {
+    "StandardScripts": [
+      "STDBASE_REQUIRED_DOCUMENTS",
+      "STDBASE_RECORD_VALIDATION"
+    ]
+  },
+  "InspectionResultSubmitAfter": {
+    "StandardScripts": [
+      "STDBASE_SEND_CONTACT_EMAILS",
+      "STDBASE_RECORD_AUTOMATION",
+      "STDBASE_INSPECTION_AUTOMATION"
+    ]
+  },
+  "PaymentReceiveAfter": {
+    "StandardScripts": [
+      "STDBASE_RECORD_AUTOMATION",
+      "STDBASE_INSPECTION_AUTOMATION"
+    ]
+  }
+}

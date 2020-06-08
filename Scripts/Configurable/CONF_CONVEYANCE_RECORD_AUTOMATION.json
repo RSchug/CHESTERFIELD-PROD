@@ -1,0 +1,127 @@
+{
+    "Conveyance/Conveyance Inspections/Installation/NA": {
+      "WorkflowTaskUpdateAfter": [
+        {
+          "metadata": {
+            "description": "",
+            "operators": {}
+          },
+          "preScript": "",
+          "criteria": {
+            "task": [
+              "Conveyance Plan Review"
+            ],
+            "status": [
+              "Not Approved"
+            ]
+          },
+          "action": {
+            "newStatus" : "Awaiting Resubmittal",
+            "updateTask": [
+               {
+                 "task": "Application Intake",
+                 "status": "Awaiting Resubmittal"
+               }
+             ]
+          },
+          "postScript": ""
+        }
+      ],
+      "DocumentUploadAfter": [
+        {
+          "metadata": {
+            "description": "",
+            "operators": {}
+          },
+          "preScript": "PRE_CONV_INSTALLATION_IS_INTAKE_ACTIVE",
+          "criteria": {
+              "workFlow": {
+                  "Conveyance Plan Review":["Not Approved"]
+              },
+          },
+          "action": {
+            "newStatus" : "Review in Progress",
+              "deactivateTask": [
+              ],
+            "updateTask": [
+               {
+                 "task": "Conveyance Plan Review",
+                 "status": "Resubmittal Review"
+               },
+               {
+                "task": "Application Intake",
+                 "status": "Accepted"
+               }
+             ],
+             "activateTask": [
+              "Conveyance Plan Review"
+            ],
+          },
+          "postScript": ""
+        }
+      ]
+    },
+      "Conveyance/Conveyance Inspections/Alteration/NA": {
+      "WorkflowTaskUpdateAfter": [
+        {
+          "metadata": {
+            "description": "",
+            "operators": {}
+          },
+          "preScript": "",
+          "criteria": {
+            "task": [
+              "Conveyance Plan Review"
+            ],
+            "status": [
+              "Not Approved"
+            ]
+          },
+          "action": {
+            "newStatus" : "Awaiting Resubmittal",
+            "updateTask": [
+               {
+                 "task": "Application Intake",
+                 "status": "Awaiting Resubmittal"
+               }
+             ]
+          },
+          "postScript": ""
+        }
+      ],
+      "DocumentUploadAfter": [
+        {
+          "metadata": {
+            "description": "",
+            "operators": {}
+          },
+          "preScript": "PRE_CONV_INSTALLATION_IS_INTAKE_ACTIVE",
+          "criteria": {
+              "workFlow": {
+                  "Conveyance Plan Review":["Not Approved"]
+              },
+          },
+          "action": {
+            "newStatus" : "Review in Progress",
+              "deactivateTask": [
+              ],
+            "updateTask": [
+               {
+                 "task": "Conveyance Plan Review",
+                 "status": "Resubmittal Review"
+               },
+               {
+                "task": "Application Intake",
+                 "status": "Accepted"
+               }
+             ],
+             "activateTask": [
+              "Conveyance Plan Review"
+            ],
+          },
+          "postScript": ""
+        }
+      ]
+    }
+   
+  }

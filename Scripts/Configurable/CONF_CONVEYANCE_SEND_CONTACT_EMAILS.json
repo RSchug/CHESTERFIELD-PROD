@@ -1,0 +1,227 @@
+{
+  "Conveyance/Conveyance Inspections/Alteration/NA": {
+    "WorkflowTaskUpdateAfter": [
+
+      {
+        "metadata": {
+          "description": "Sends Email Template to necessary Contact Types with available parameters",
+          "operators": {
+            
+          }
+        },
+        "preScript": "",
+        "criteria": {
+          "task": [
+            "Permit Issuance"
+          ],
+          "status": [
+            "Ready To Pay"
+          ]
+        },
+        "action": {
+          "notificationTemplate": "CONV-READY-TO-PAY",
+          "notifyContactTypes": [
+            "ALL"
+          ],
+          "notificationReport": [
+            ""
+          ],
+          "fromEmail": "SystemTemplate"
+        },
+        "postScript": ""
+      },
+      {
+        "metadata": {
+          "description": "Sends Email Template to necessary Contact Types with available parameters",
+          "operators": {
+            
+          }
+        },
+        "preScript": "",
+        "criteria": {
+          "task": [
+            "Application Intake"
+          ],
+          "status": [
+            "Additional Info Required"
+          ]
+        },
+        "action": {
+          "notificationTemplate": "CONV-FIRE-ADDINFO",
+          "notifyContactTypes": [
+            "ALL"
+          ],
+          "fromEmail": "SystemTemplate"
+        },
+        "postScript": ""
+      },
+      {
+        "metadata": {
+          "description": "Sends Email Template to necessary Contact Types with available parameters",
+          "operators": {
+            
+          }
+        },
+        "preScript": "",
+        "criteria": {
+          "task": [
+            "Application Intake"
+          ],
+          "status": [
+            "Ready to Pay"
+          ]
+        },
+        "action": {
+          "notificationTemplate": "CONV-READY-TO-PAY",
+          "notifyContactTypes": [
+            "ALL"
+          ],
+          "fromEmail": "SystemTemplate"
+        },
+        "postScript": ""
+      }
+    ]
+  },
+  "Conveyance/Conveyance Inspections/Installation/NA": {
+    "WorkflowTaskUpdateAfter": [
+      {
+        "metadata": {
+          "description": "Sends Email Template to necessary Contact Types with available parameters",
+          "operators": {
+            
+          }
+        },
+        "preScript": "",
+        "criteria": {
+          "task": [
+            "Permit Issuance"
+          ],
+          "status": [
+            "Ready To Pay"
+          ]
+        },
+        "action": {
+          "notificationTemplate": "CONV-READY-TO-PAY",
+          "notifyContactTypes": [
+            "ALL"
+          ],
+          "notificationReport": [
+            ""
+          ],
+          "fromEmail": "SystemTemplate"
+        },
+        "postScript": ""
+      },
+      {
+        "metadata": {
+          "description": "Sends Email Template to necessary Contact Types with available parameters",
+          "operators": {
+            
+          }
+        },
+        "preScript": "",
+        "criteria": {
+          "task": [
+            "Application Intake"
+          ],
+          "status": [
+            "Additional Info Required"
+          ]
+        },
+        "action": {
+          "notificationTemplate": "CONV-FIRE-ADDINFO",
+          "notifyContactTypes": [
+            "ALL"
+          ],
+          "fromEmail": "SystemTemplate"
+        },
+        "postScript": ""
+      },
+      {
+        "metadata": {
+          "description": "Sends Email Template to necessary Contact Types with available parameters",
+          "operators": {
+            
+          }
+        },
+        "preScript": "",
+        "criteria": {
+          "task": [
+            "Application Intake"
+          ],
+          "status": [
+            "Ready to Pay"
+          ]
+        },
+        "action": {
+          "notificationTemplate": "CONV-READY-TO-PAY",
+          "notifyContactTypes": [
+            "ALL"
+          ],
+          "fromEmail": "SystemTemplate"
+        },
+        "postScript": ""
+      }
+    ]
+  },
+  "Conveyance/*/*/*": {
+    "WorkflowTaskUpdateAfter": [
+      {
+        "metadata": {
+          "description": "Sends Email Template to necessary Contact Types with available parameters",
+          "operators": {
+            
+          }
+        },
+        "preScript": "",
+        "criteria": {
+          "status": [
+            "Withdrawn"
+          ]
+        },
+        "action": {
+          "notificationTemplate": "CONV-FIRE-PERMIT WITHDRAWN",
+          "notifyContactTypes": [
+            "ALL"
+          ],
+          "fromEmail": "SystemTemplate"
+        },
+        "postScript": ""
+      }
+    ]
+  },
+  "Conveyance/Conveyance Inspections/Accident Report/NA": {
+    "WorkflowTaskUpdateAfter": [
+      {
+        "metadata": {
+          "description": "Sends Email Template to necessary Contact Types with available parameters",
+          "operators": {
+            
+          }
+        },
+        "preScript": "",
+        "criteria": {
+          "task": [
+            "Review Accident"
+          ],
+          "status": [
+            "In Compliance",
+            "Revoked CO"
+          ]
+        },
+        "action": {
+          "notificationTemplate": "CONV-FIRE-ACCIDENT-REPORT",
+          "notifyContactTypes": [
+            "ALL"
+          ],
+          "createFromParent": true,
+          "notificationReport": [
+            "CONVEYANCE ACCIDENT REPORT"
+          ],
+          "fromEmail": "SystemTemplate"
+        },
+        "postScript": ""
+      }
+    ]
+  }
+}
