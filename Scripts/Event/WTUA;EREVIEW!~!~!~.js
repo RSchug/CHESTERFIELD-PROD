@@ -1,6 +1,7 @@
 try {
     if (matches(wfTask, 'Review Distribution') & matches(wfStatus, 'Additional Information Requested')) {
         emailPendingApplicantNotification();
+		
     }
     if (appMatch('*/Planning/*/*') && matches(wfTask,'Review Distribution') & matches(wfStatus,'Routed for Review') && AInfo['Review Time Options'] == 'First Glance') {
 		editTaskDueDate('*',dateAdd(null,7));
