@@ -18,8 +18,8 @@ var reviewTaskResubmitStatus = "Corrections Required";
 var reviewTaskApprovedStatusArray = ["Approved","Approved with Conditions"]; //Not currently used, but could be for a review task approval email notification
 var reviewTaskStatusPendingArray = [null,"",undefined,"Revisions Received","In Review"];
 var consolidationTask = "Review Consolidation";
-var consolidationResubmitStatus = "Corrections Required";
-var consolidationApprovedStatus = "Approved";
+var ResubmitStatus = "Corrections Required";
+var ApprovedStatus = "Approved";
 
 /*-----START DIGEPLAN EDR SCRIPTS-----*/
 
@@ -56,13 +56,13 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && exists(wfTask.toUppe
         //emailReviewConsolidationNotification();
 }
 
-//send email to Applicant on consolidationTask/consolidationResubmitStatus or consolidationTask/consolidationApprovedStatus
-if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && wfTask == consolidationTask && matches(wfStatus,consolidationResubmitStatus,consolidationApprovedStatus)) {
+//send email to Applicant on consolidationTask/consolidationResubmitStatus or consolidationTask/ApprovedStatus
+if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && wfTask == consolidationTask && matches(wfStatus,ResubmitStatus,ApprovedStatus)) {
 	emailReviewCompleteNotification(wfStatus,consolidationResubmitStatus,consolidationApprovedStatus,docGroupArrayModule);
 }
 
-//Update Approved Document Statuses/Category on consolidationTask/consolidationApprovedStatus
-if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,consolidationTask) && matches(wfStatus,consolidationApprovedStatus)) {
+//Update Approved Document Statuses/Category on consolidationTask/ApprovedStatus
+if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,consolidationTask) && matches(wfStatus,ApprovedStatus)) {
 	docArray = aa.document.getCapDocumentList(capId,currentUserID).getOutput();
 	if(docArray != null && docArray.length > 0) {
 		for (d in docArray) {
