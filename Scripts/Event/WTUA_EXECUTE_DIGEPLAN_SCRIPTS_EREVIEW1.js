@@ -58,7 +58,7 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && exists(wfTask.toUppe
 
 //send email to Applicant on consolidationTask/consolidationResubmitStatus or consolidationTask/ApprovedStatus
 if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && wfTask == consolidationTask && matches(wfStatus,ResubmitStatus,ApprovedStatus)) {
-	emailReviewCompleteNotification(wfStatus,consolidationResubmitStatus,consolidationApprovedStatus,docGroupArrayModule);
+	emailReviewCompleteNotification(ResubmitStatus,ApprovedStatus,docGroupArrayModule);
 }
 
 //Update Approved Document Statuses/Category on consolidationTask/ApprovedStatus
