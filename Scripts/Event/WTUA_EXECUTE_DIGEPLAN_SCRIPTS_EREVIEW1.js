@@ -7,7 +7,6 @@ var docGroupArrayModule = ["EREVIEW"];
 var docTypeArrayModule = ["Plans","Supporting Documents","Application","Calculation","Correspondance","Code Modification","Image","Legal Documentation","Plat"];
 
 
-
 //Workflow Specific variables for EREVIEW1
 var reviewTasksArray = ["STRUCTURAL REVIEW","NON-STRUCTURAL REVIEW","MECHANICAL REVIEW","PLUMBING REVIEW","ELECTRICAL REVIEW","GAS REVIEW","ADDRESSING REVIEW","ENVIRONMENTAL ENGINEERING REVIEW","PLANNING REVIEW","UTILITIES REVIEW","BUDGET AND MANAGEMENT REVIEW","HEALTH DEPARTMENT REVIEW"];
 var taskStatusArray = ["APPROVED","APPROVED WITH CONDITIONS","CORRECTIONS REQUIRED","NOT REQUIRED"];
@@ -62,6 +61,23 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && wfTask == consolidat
 	emailReviewCompleteNotification(ResubmitStatus,ApprovedStatus,docGroupArrayModule);
 }
 
+//Update Resubmit Document Status/Category on consolidationTask/ResubmitStatus
+if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,consolidationTask) && matches(wfStatus,ResubmitStatus)) {
+	docArray = aa.document.getCapDocumentList(capId,currentUserID).getOutput();
+	if(docArray != null && docArray.length > 0) {
+		for (d in docArray) {
+			if((exists(docArray[d]["docGroup"],docGroupArrayModule) || docArray[d]["docGroup"] == null) && matches(docArray[d]["docStatus"],reviewCompleteDocStatus,"Uploaded") && docArray[d]["fileUpLoadBy"] == digEplanAPIUser) {
+				if(docArray[d]["docName"].indexOf("Interim Report") == -1 && matches(getParentDocStatus(docArray[d]),revisionsRequiredDocStatus)) {
+					if(matches(getParentDocStatus(docArray[d]),revisionsRequiredDocStatus)) updateParentDocStatus(docArray[d],revisionsRequiredDocStatus);
+					logDebug("<font color='green'>*Final Report - Revisions Required DocumentID: " + docArray[d]["documentNo"]+ "</font>");
+					updateCheckInDocStatus(docArray[d],revisionsRequiredDocStatus,approvedDocStatus,approvedFinalDocStatus);
+					updateDocPermissionsbyCategory(docArray[d],docCommentCategory);
+				}
+			}
+		}
+	}
+}
+
 //Update Approved Document Statuses/Category on consolidationTask/ApprovedStatus
 if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,consolidationTask) && matches(wfStatus,ApprovedStatus)) {
 	docArray = aa.document.getCapDocumentList(capId,currentUserID).getOutput();
@@ -75,7 +91,7 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,conso
 				if(docArray[d]["docName"].indexOf("Interim Report") == -1 && matches(getParentDocStatus(docArray[d]),approvedDocStatus,approvedPendingDocStatus)) {
 					if(matches(getParentDocStatus(docArray[d]),approvedDocStatus)) updateParentDocStatus(docArray[d],approvedPendingDocStatus);
 					logDebug("<font color='green'>*Final Report - Approved DocumentID: " + docArray[d]["documentNo"]+ "</font>");
-					updateCheckInDocStatus(docArray[d],revisionsRequiredDocStatus,approvedDocStatus,approvedPendingDocStatus);
+					updateCheckInDocStatus(docArray[d],revisionsRequiredDocStatus,approvedDocStatus,approvedFinalDocStatus);
 					updateDocPermissionsbyCategory(docArray[d],docInternalCategory);
 				}
 				if(docArray[d]["docName"].indexOf("Sheet Report") == 0 && docArray[d]["docStatus"] == "Uploaded") {

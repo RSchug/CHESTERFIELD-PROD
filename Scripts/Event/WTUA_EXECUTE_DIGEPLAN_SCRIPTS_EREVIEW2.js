@@ -17,7 +17,8 @@ var reviewTaskResubmitStatus = ["REVISIONS REQUESTED", "SUBSTANTIAL APPROVAL", "
 var reviewTaskApprovedStatusArray = ["Approved", "Approved with Conditions"]; //Not currently used, but could be for a review task approval email notification
 var reviewTaskStatusPendingArray = [null, "", undefined, "Revisions Received", "In Review"];
 var consolidationTask = "Review Consolidation";
-var ResubmitStatus = '';
+if (matches(wfStatus, 'RR-Substatntial Approval', 'RR-Table Review', 'Revisions Requested', 'First Glance Complete')) {
+var ResubmitStatus = wfStatus; }
 var ApprovedStatus = 'Approved';
 
 /*-----START DIGEPLAN EDR SCRIPTS-----*/
@@ -43,6 +44,23 @@ if (edrPlansExist(docGroupArrayModule, docTypeArrayModule) && exists(wfStatus, r
     updatePlanReviewTasks4Resubmittal(reviewTasksArray, taskStatusArray, reviewTaskResubmittalReceivedStatus);
 }
 
+//Update Resubmit Document Status/Category on consolidationTask/ResubmitStatus
+if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,consolidationTask) && matches(wfStatus, ResubmitStatus)) {
+	docArray = aa.document.getCapDocumentList(capId,currentUserID).getOutput();
+	if(docArray != null && docArray.length > 0) {
+		for (d in docArray) {
+			if((exists(docArray[d]["docGroup"],docGroupArrayModule) || docArray[d]["docGroup"] == null) && matches(docArray[d]["docStatus"],reviewCompleteDocStatus,"Uploaded") && docArray[d]["fileUpLoadBy"] == digEplanAPIUser) {
+				if(docArray[d]["docName"].indexOf("Interim Report") == -1 && matches(getParentDocStatus(docArray[d]),revisionsRequiredDocStatus)) {
+					if(matches(getParentDocStatus(docArray[d]),revisionsRequiredDocStatus)) updateParentDocStatus(docArray[d],revisionsRequiredDocStatus);
+					logDebug("<font color='green'>*Final Report - Revisions Required DocumentID: " + docArray[d]["documentNo"]+ "</font>");
+					updateCheckInDocStatus(docArray[d],revisionsRequiredDocStatus,approvedDocStatus,approvedFinalDocStatus);
+					updateDocPermissionsbyCategory(docArray[d],docCommentCategory);
+				}
+			}
+		}
+	}
+}
+
 //Update Approved Document Statuses/Category on consolidationTask/ApprovedStatus
 if (edrPlansExist(docGroupArrayModule, docTypeArrayModule) && matches(wfTask, consolidationTask) && matches(wfStatus, ApprovedStatus)) {
     docArray = aa.document.getCapDocumentList(capId, currentUserID).getOutput();
@@ -57,7 +75,7 @@ if (edrPlansExist(docGroupArrayModule, docTypeArrayModule) && matches(wfTask, co
                     if (matches(getParentDocStatus(docArray[d]), approvedDocStatus))
                         updateParentDocStatus(docArray[d], approvedPendingDocStatus);
                     logDebug("<font color='green'>*Final Report - Approved DocumentID: " + docArray[d]["documentNo"] + "</font>");
-                    updateCheckInDocStatus(docArray[d], revisionsRequiredDocStatus, approvedDocStatus, approvedPendingDocStatus);
+                    updateCheckInDocStatus(docArray[d], revisionsRequiredDocStatus, approvedDocStatus, approvedFinalDocStatus);
                     updateDocPermissionsbyCategory(docArray[d], docInternalCategory);
                 }
                 if (docArray[d]["docName"].indexOf("Sheet Report") == 0 && docArray[d]["docStatus"] == "Uploaded") {
@@ -90,13 +108,11 @@ if (exists(wfTask.toUpperCase(), reviewTasksArray) && isTaskActive(consolidation
 }
 
 //send email to Applicant on consolidationTask Resubmit
-if (wfTask == consolidationTask && matches(wfStatus, 'RR-Substatntial Approval', 'RR-Table Review', 'Revisions Requested', 'First Glance Complete')) {
-    ResubmitStatus = wfStatus;
+if (wfTask == consolidationTask && matches(wfStatus, ResubmitStatus)) {
     emailReviewCompleteNotification(ResubmitStatus, ApprovedStatus, docTypeArrayModule);
 }
 //send email to Applicant on consolidationTask Approved Status
-if (wfTask == consolidationTask && matches(wfStatus, 'Approved')) {
-    ApprovedStatus = wfStatus;
+if (wfTask == consolidationTask && matches(wfStatus, ApprovedStatus)) {
     emailReviewCompleteNotification(ResubmitStatus, ApprovedStatus, docTypeArrayModule);
 }
 
