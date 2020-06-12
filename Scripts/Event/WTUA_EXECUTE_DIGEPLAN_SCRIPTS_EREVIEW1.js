@@ -4,7 +4,7 @@ logDebug("Inside WTUA_EXECUTE_DIGEPLAN_SCRIPTS_EREVIEW1");
 /*-----DEFINE VARIABLES FOR DIGEPLAN SCRIPTS-----*/
 //Document Specific Variables for EREVIEW1
 var docGroupArrayModule = ["EREVIEW"];
-var docTypeArrayModule = ["Plans","Supporting Documents","Application","Calculation","Correspondance","Code Modification","Image","Legal Documentation","Plat"];
+var docTypeArrayModule = ["Plans","Supporting Documents","Application","Calculation","Correspondance","Code Modification","Image","Legal Documentation","Plat","Comments","Final Plans"];
 
 
 //Workflow Specific variables for EREVIEW1
@@ -61,19 +61,20 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && wfTask == consolidat
 	emailReviewCompleteNotification(ResubmitStatus,ApprovedStatus,docGroupArrayModule);
 }
 
-//Update Resubmit Document Status/Category on consolidationTask/ResubmitStatus
-if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,consolidationTask) && matches(wfStatus,ResubmitStatus)) {
-	docArray = aa.document.getCapDocumentList(capId,currentUserID).getOutput();
+//Set Resubmit Document Status/Category on consolidationTask/ResubmitStatus
+if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,consolidationTask) && exists(wfStatus,ResubmitStatus)) {
+	var docArray = aa.document.getCapDocumentList(capId,currentUserID).getOutput();
 	if(docArray != null && docArray.length > 0) {
 		for (d in docArray) {
-			if((exists(docArray[d]["docGroup"],docGroupArrayModule) || docArray[d]["docGroup"] == null) && matches(docArray[d]["docStatus"],reviewCompleteDocStatus) && docArray[d]["fileUpLoadBy"] == digEplanAPIUser) {
-				if(docArray[d]["docName"].indexOf("Revisions Requested") > -1 && matches(getParentDocStatus(docArray[d]),reviewCompleteDocStatus)) {
-					updateCheckInDocStatus(docArray[d],revisionsRequiredDocStatus,approvedDocStatus,approvedFinalDocStatus);
-					updateDocPermissionsbyCategory(docArray[d],docCommentCategory);
-				}
+			if(exists(docArray[d]["docGroup"],docGroupArrayModule) && exists(docArray[d]["docCategory"],"Plans") && docArray[d]["docStatus"] == "Review Complete") {
+				docArray[d].setDocStatus(inReviewDocStatus);
+				docArray[d].setRecStatus("A");
+				docArray[d].setDocCategory(docCommentCategory);
+				docArray[d].setSource(getVendor(docArray[d].getSource(), docArray[d].getSourceName()));
+				updateDocResult = aa.document.updateDocument(docArray[d]);
 			}
 		}
-	}
+	}	
 }
 
 //Update Approved Document Statuses/Category on consolidationTask/ApprovedStatus
@@ -85,10 +86,8 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,conso
 			//logDebug("DocumentGroup: " + docArray[d]["docGroup"]);
 			//logDebug("DocName: " + docArray[d]["docName"]);
 			//logDebug("DocumentID: " + docArray[d]["documentNo"]);
-			if((exists(docArray[d]["docGroup"],docGroupArrayModule) || docArray[d]["docGroup"] == null) && matches(docArray[d]["docStatus"],reviewCompleteDocStatus) && docArray[d]["fileUpLoadBy"] == digEplanAPIUser) {
-				if(docArray[d]["docName"].indexOf("Interim Report") == -1 && matches(getParentDocStatus(docArray[d]),approvedDocStatus,approvedPendingDocStatus)) {
-					if(matches(getParentDocStatus(docArray[d]),approvedDocStatus)) updateParentDocStatus(docArray[d],approvedPendingDocStatus);
-					logDebug("<font color='green'>*Final Report - Approved DocumentID: " + docArray[d]["documentNo"]+ "</font>");
+			if((exists(docArray[d]["docGroup"],docGroupArrayModule) || docArray[d]["docGroup"] == null) && matches(docArray[d]["docStatus"],reviewCompleteDocStatus)) {
+				if(matches(getParentDocStatus(docArray[d]),approvedDocStatus,approvedPendingDocStatus)) {
 					updateCheckInDocStatus(docArray[d],revisionsRequiredDocStatus,approvedDocStatus,approvedFinalDocStatus);
 					updateDocPermissionsbyCategory(docArray[d],docInternalCategory);
 				}
