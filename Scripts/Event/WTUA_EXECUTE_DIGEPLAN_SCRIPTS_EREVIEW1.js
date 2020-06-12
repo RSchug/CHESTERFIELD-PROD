@@ -66,10 +66,8 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,conso
 	docArray = aa.document.getCapDocumentList(capId,currentUserID).getOutput();
 	if(docArray != null && docArray.length > 0) {
 		for (d in docArray) {
-			if((exists(docArray[d]["docGroup"],docGroupArrayModule) || docArray[d]["docGroup"] == null) && matches(docArray[d]["docStatus"],reviewCompleteDocStatus,"Uploaded") && docArray[d]["fileUpLoadBy"] == digEplanAPIUser) {
-				if(docArray[d]["docName"].indexOf("Interim Report") == -1 && matches(getParentDocStatus(docArray[d]),revisionsRequiredDocStatus)) {
-					if(matches(getParentDocStatus(docArray[d]),revisionsRequiredDocStatus)) updateParentDocStatus(docArray[d],revisionsRequiredDocStatus);
-					logDebug("<font color='green'>*Final Report - Revisions Required DocumentID: " + docArray[d]["documentNo"]+ "</font>");
+			if((exists(docArray[d]["docGroup"],docGroupArrayModule) || docArray[d]["docGroup"] == null) && matches(docArray[d]["docStatus"],revisionsRequiredDocStatus,"Uploaded") && docArray[d]["fileUpLoadBy"] == digEplanAPIUser) {
+				if(docArray[d]["docName"].indexOf("Revisions Requested") > -1 && matches(getParentDocStatus(docArray[d]),revisionsRequiredDocStatus)) {
 					updateCheckInDocStatus(docArray[d],revisionsRequiredDocStatus,approvedDocStatus,approvedFinalDocStatus);
 					updateDocPermissionsbyCategory(docArray[d],docCommentCategory);
 				}

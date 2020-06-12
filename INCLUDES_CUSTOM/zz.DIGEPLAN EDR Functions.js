@@ -524,11 +524,11 @@ function synchronizeDocFileNames() {
 	}
 }
 
-function updateCheckInDocStatus(documentModel,revisionStatus,approvedStatus,approvedFinalDocStatus) {
+function updateCheckInDocStatus(documentModel,revisionsRequiredDocStatus,approvedStatus,approvedFinalDocStatus) {
 	var docAutoStatus = documentModel["docStatus"]; //logDebug("Original Doc Status: " + docAutoStatus);
 	//var docDescription = String(documentModel["docDescription"]); //logDebug("docDescription: " + docDescription);
 	var docAutoStatus = getParentDocStatus(documentModel); //logDebug("Parent Doc Status: " + docAutoStatus);
-	if(docAutoStatus == revisionStatus) docAutoStatus = revisionStatus;
+	if(docAutoStatus == revisionsRequiredDocStatus) docAutoStatus = revisionsRequiredDocStatus;
 	if(docAutoStatus == approvedStatus) docAutoStatus = approvedFinalDocStatus;
     if(docAutoStatus == approvedFinalDocStatus) docAutoStatus = approvedFinalDocStatus;
 	//logDebug("docAutoStatus: " + docAutoStatus);
