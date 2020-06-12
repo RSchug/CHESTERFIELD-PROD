@@ -66,8 +66,8 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,conso
 	docArray = aa.document.getCapDocumentList(capId,currentUserID).getOutput();
 	if(docArray != null && docArray.length > 0) {
 		for (d in docArray) {
-			if((exists(docArray[d]["docGroup"],docGroupArrayModule) || docArray[d]["docGroup"] == null) && matches(docArray[d]["docStatus"],revisionsRequiredDocStatus,"Uploaded") && docArray[d]["fileUpLoadBy"] == digEplanAPIUser) {
-				if(docArray[d]["docName"].indexOf("Revisions Requested") > -1 && matches(getParentDocStatus(docArray[d]),revisionsRequiredDocStatus)) {
+			if((exists(docArray[d]["docGroup"],docGroupArrayModule) || docArray[d]["docGroup"] == null) && matches(docArray[d]["docStatus"],reviewCompleteDocStatus) && docArray[d]["fileUpLoadBy"] == digEplanAPIUser) {
+				if(docArray[d]["docName"].indexOf("Revisions Requested") > -1 && matches(getParentDocStatus(docArray[d]),reviewCompleteDocStatus)) {
 					updateCheckInDocStatus(docArray[d],revisionsRequiredDocStatus,approvedDocStatus,approvedFinalDocStatus);
 					updateDocPermissionsbyCategory(docArray[d],docCommentCategory);
 				}
@@ -85,7 +85,7 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,conso
 			//logDebug("DocumentGroup: " + docArray[d]["docGroup"]);
 			//logDebug("DocName: " + docArray[d]["docName"]);
 			//logDebug("DocumentID: " + docArray[d]["documentNo"]);
-			if((exists(docArray[d]["docGroup"],docGroupArrayModule) || docArray[d]["docGroup"] == null) && matches(docArray[d]["docStatus"],reviewCompleteDocStatus,"Uploaded") && docArray[d]["fileUpLoadBy"] == digEplanAPIUser) {
+			if((exists(docArray[d]["docGroup"],docGroupArrayModule) || docArray[d]["docGroup"] == null) && matches(docArray[d]["docStatus"],reviewCompleteDocStatus) && docArray[d]["fileUpLoadBy"] == digEplanAPIUser) {
 				if(docArray[d]["docName"].indexOf("Interim Report") == -1 && matches(getParentDocStatus(docArray[d]),approvedDocStatus,approvedPendingDocStatus)) {
 					if(matches(getParentDocStatus(docArray[d]),approvedDocStatus)) updateParentDocStatus(docArray[d],approvedPendingDocStatus);
 					logDebug("<font color='green'>*Final Report - Approved DocumentID: " + docArray[d]["documentNo"]+ "</font>");
