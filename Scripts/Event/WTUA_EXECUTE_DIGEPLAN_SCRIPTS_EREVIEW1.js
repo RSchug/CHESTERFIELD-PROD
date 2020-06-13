@@ -59,14 +59,14 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && exists(wfTask.toUppe
 //send email to Applicant on consolidationTask/consolidationResubmitStatus or consolidationTask/ApprovedStatus and update type to Comment
 if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && wfTask == consolidationTask && matches(wfStatus,ResubmitStatus,ApprovedStatus)) {
 	emailReviewCompleteNotification(ResubmitStatus,ApprovedStatus,docGroupArrayModule);
-	var docArray = aa.document.getCapDocumentList(capId,currentUserID).getOutput();
-	if(docArray != null && docArray.length > 0) {
-		for (d in docArray) {
-			if(exists(docArray[d]["docGroup"],docGroupArrayModule) && exists(docArray[d]["docCategory"],"Plans") && docArray[d]["docStatus"] == "Review Complete") {
-				docArray[d].setDocStatus(reviewCompleteDocStatus);
-				docArray[d].setRecStatus("A");
-				docArray[d].setDocCategory(docCommentCategory);
-				updateDocResult = aa.document.updateDocument(docArray[d]);
+//Update the mark up report to Comment Doc Type
+	if(edrPlansExist(docGroupArrayModule,docTypeArrayModule)) {
+		var docArray = aa.document.getCapDocumentList(capId,currentUserID).getOutput();
+		if(docArray != null && docArray.length > 0) {
+			for (d in docArray) {
+				if(docArray[d]["docStatus"] == "Review Complete") {
+					updateDocPermissionsbyCategory(docArray[d],"Comments");
+				}
 			}
 		}
 	}
