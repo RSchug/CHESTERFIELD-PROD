@@ -56,13 +56,9 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && exists(wfTask.toUppe
         //emailReviewConsolidationNotification();
 }
 
-//send email to Applicant on consolidationTask/consolidationResubmitStatus or consolidationTask/ApprovedStatus
+//send email to Applicant on consolidationTask/consolidationResubmitStatus or consolidationTask/ApprovedStatus and update type to Comment
 if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && wfTask == consolidationTask && matches(wfStatus,ResubmitStatus,ApprovedStatus)) {
 	emailReviewCompleteNotification(ResubmitStatus,ApprovedStatus,docGroupArrayModule);
-}
-
-//Set Resubmit Document Status/Category on consolidationTask/ResubmitStatus to Comments
-if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,consolidationTask) && exists(wfStatus,ResubmitStatus)) {
 	var docArray = aa.document.getCapDocumentList(capId,currentUserID).getOutput();
 	if(docArray != null && docArray.length > 0) {
 		for (d in docArray) {
@@ -70,11 +66,10 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,conso
 				docArray[d].setDocStatus(reviewCompleteDocStatus);
 				docArray[d].setRecStatus("A");
 				docArray[d].setDocCategory(docCommentCategory);
-				//docArray[d].setSource(getVendor(docArray[d].getSource(), docArray[d].getSourceName()));
 				updateDocResult = aa.document.updateDocument(docArray[d]);
 			}
 		}
-	}	
+	}
 }
 
 //Update Approved Document Statuses/Category on consolidationTask/ApprovedStatus
