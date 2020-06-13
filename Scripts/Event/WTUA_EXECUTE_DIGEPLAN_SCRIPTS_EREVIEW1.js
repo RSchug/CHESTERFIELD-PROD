@@ -61,16 +61,16 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && wfTask == consolidat
 	emailReviewCompleteNotification(ResubmitStatus,ApprovedStatus,docGroupArrayModule);
 }
 
-//Set Resubmit Document Status/Category on consolidationTask/ResubmitStatus
+//Set Resubmit Document Status/Category on consolidationTask/ResubmitStatus to Comments
 if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,consolidationTask) && exists(wfStatus,ResubmitStatus)) {
 	var docArray = aa.document.getCapDocumentList(capId,currentUserID).getOutput();
 	if(docArray != null && docArray.length > 0) {
 		for (d in docArray) {
 			if(exists(docArray[d]["docGroup"],docGroupArrayModule) && exists(docArray[d]["docCategory"],"Plans") && docArray[d]["docStatus"] == "Review Complete") {
-				docArray[d].setDocStatus(inReviewDocStatus);
+				docArray[d].setDocStatus(reviewCompleteDocStatus);
 				docArray[d].setRecStatus("A");
 				docArray[d].setDocCategory(docCommentCategory);
-				docArray[d].setSource(getVendor(docArray[d].getSource(), docArray[d].getSourceName()));
+				//docArray[d].setSource(getVendor(docArray[d].getSource(), docArray[d].getSourceName()));
 				updateDocResult = aa.document.updateDocument(docArray[d]);
 			}
 		}
