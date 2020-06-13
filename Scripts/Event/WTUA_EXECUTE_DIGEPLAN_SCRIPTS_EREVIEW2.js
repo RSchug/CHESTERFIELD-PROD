@@ -103,7 +103,14 @@ synchronizeDocFileNames();
 //update consolidationTask when all required reviewTasksArray tasks have been completed
 if (exists(wfTask.toUpperCase(), reviewTasksArray) && isTaskActive(consolidationTask) && checkForPendingReviews(reviewTasksArray, reviewTaskStatusPendingArray) == false) {
     updateTask(consolidationTask, "Ready for Consolidation", "Required Reviews are completed. Review Consolidation needs to be prepared.", "");
-	assignTask('Review Consolidation',aa.person.getUser(assignedTo));
+	capDetail = aa.cap.getCapDetail(capId).getOutput();
+			userObj = aa.person.getUser(capDetail.getAsgnStaff());
+			if (userObj.getSuccess()) {
+				staff = userObj.getOutput();
+				userID = staff.getUserID();
+				logDebug("userID: " + userID);
+				assignTask('Review Consolidation',userID);
+			}
     //db updated per buisness request 4-27-2020 - no need to email assignee
     //emailReviewConsolidationNotification();
 }
