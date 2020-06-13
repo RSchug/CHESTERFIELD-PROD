@@ -6,7 +6,6 @@ logDebug("Inside WTUA_EXECUTE_DIGEPLAN_SCRIPTS_EREVIEW1");
 var docGroupArrayModule = ["EREVIEW"];
 var docTypeArrayModule = ["Plans","Supporting Documents","Application","Calculation","Correspondance","Code Modification","Image","Legal Documentation","Plat","Comments","Final Plans"];
 
-
 //Workflow Specific variables for EREVIEW1
 var reviewTasksArray = ["STRUCTURAL REVIEW","NON-STRUCTURAL REVIEW","MECHANICAL REVIEW","PLUMBING REVIEW","ELECTRICAL REVIEW","GAS REVIEW","ADDRESSING REVIEW","ENVIRONMENTAL ENGINEERING REVIEW","PLANNING REVIEW","UTILITIES REVIEW","BUDGET AND MANAGEMENT REVIEW","HEALTH DEPARTMENT REVIEW"];
 var taskStatusArray = ["APPROVED","APPROVED WITH CONDITIONS","CORRECTIONS REQUIRED","NOT REQUIRED"];
