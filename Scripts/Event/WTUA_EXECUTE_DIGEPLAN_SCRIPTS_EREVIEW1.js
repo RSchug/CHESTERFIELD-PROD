@@ -38,10 +38,9 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,routi
 	}	
 }
 
-//update required reviewTaskArray tasks to reviewTaskResubmittalReceivedStatus
-if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && exists(wfStatus,resubmittalRoutedStatusArray)) {
-	updatePlanReviewTasks4Resubmittal(reviewTasksArray,taskStatusArray,reviewTaskResubmittalReceivedStatus);
-}
+//update required reviewTaskArray tasks to reviewTaskResubmittalReceivedStatus - 08/2020 db turned off from Enhancement
+//if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && exists(wfStatus,resubmittalRoutedStatusArray)) {
+//	updatePlanReviewTasks4Resubmittal(reviewTasksArray,taskStatusArray,reviewTaskResubmittalReceivedStatus); }
 
 /*send email to Applicant on reviewTaskResubmitStatus - business on 05-2020 wanted this turned off
 if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && exists(wfTask.toUpperCase(),reviewTasksArray) && wfStatus == reviewTaskResubmitStatus) {

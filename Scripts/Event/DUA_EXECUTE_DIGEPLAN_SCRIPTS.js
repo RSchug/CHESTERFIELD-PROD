@@ -38,9 +38,13 @@ if(doPreCache) {
      var docPreCache = digEplanPreCache("chesterfield",capIDString);
 }
 /*------------END EDR UPLOAD/RESUBMITTAL ACTIONS------------*/
-//Since we are not able to get DUA:eReview to run, we are running here, because somehow the DocumentUploadAfter Event is running this DUA_EXECUTE_DIGEPLAN_SCRIPTS...?? 05-2020 db
+//05-2020 db - Since not able to get DUA:eReview to run in ACA, we are running here, the DocumentUploadAfter Event is running this DUA_EXECUTE_DIGEPLAN_SCRIPTS with the Standard Choice
 try {
-    if (matches(capStatus, "Pending Applicant") && newDocModelArray[dl]["categoryByAction"] != "RESUBMIT") {
+    if (publicUser && matches(capStatus, "Pending Applicant") && matches(appTypeString,'eReview/Planning/NA/NA')) {
+        updateTask("Review Distribution", "Revisions Received");
+        updateAppStatus("Revisions Received", "Update by Document Upload");
+    }
+	if (publicUser && matches(appTypeString,'eReview/Building/NA/NA')) {
         updateTask("Review Distribution", "Revisions Received");
         updateAppStatus("Revisions Received", "Update by Document Upload");
     }

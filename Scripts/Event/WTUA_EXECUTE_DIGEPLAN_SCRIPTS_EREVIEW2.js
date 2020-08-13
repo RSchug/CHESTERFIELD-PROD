@@ -39,10 +39,9 @@ if (edrPlansExist(docGroupArrayModule, docTypeArrayModule) && matches(wfTask, ro
     }
 }
 
-//update required reviewTaskArray tasks to reviewTaskResubmittalReceivedStatus
-if (edrPlansExist(docGroupArrayModule, docTypeArrayModule) && exists(wfStatus, resubmittalRoutedStatusArray)) {
-    updatePlanReviewTasks4Resubmittal(reviewTasksArray, taskStatusArray, reviewTaskResubmittalReceivedStatus);
-}
+//update required reviewTaskArray tasks to reviewTaskResubmittalReceivedStatus - 08/2020 db turned off from Enhancement
+//if (edrPlansExist(docGroupArrayModule, docTypeArrayModule) && exists(wfStatus, resubmittalRoutedStatusArray)) {
+//    updatePlanReviewTasks4Resubmittal(reviewTasksArray, taskStatusArray, reviewTaskResubmittalReceivedStatus); }
 
 //Update Approved Document Statuses/Category on consolidationTask/ApprovedStatus
 if (edrPlansExist(docGroupArrayModule, docTypeArrayModule) && matches(wfTask, consolidationTask) && matches(wfStatus, ApprovedStatus)) {
