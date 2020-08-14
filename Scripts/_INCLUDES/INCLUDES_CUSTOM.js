@@ -4895,17 +4895,19 @@ function updatePlanReviewTasks4Resubmittal(reviewTasksArray, taskStatusArray, re
     }
 }
 
-function digEplanPreCache(client, capId) {
-    var soapresp = "DigEplan precache did not work";
-
-    if (getEnvironment() == "NON-PROD") {
-        soapresp = aa.util.httpPost('https://api.pre-prod.digeplan.com/api/precache/folders?product=app&client=' + client + '&originalFolderId=' + capId, '').getOutput();
-        logDebug("<font color='green'>Calling PRE-PROD V5 API </font>");
-    } else {
-        soapresp = aa.util.httpPost('https://api.usw.digeplan.com/api/precache/folders?product=app&client=' + client + '&originalFolderId=' + capId, '').getOutput();
-        logDebug("<font color='green'>Calling PROD V5 API </font>");
-    }
-    return soapresp;
+function digEplanPreCache(client,altId)
+{
+	var soapresp = "DigEplan precache did not work";
+	var thisEnv = getEnvironment();
+	var preCacheURL = "";
+	if(thisEnv == "PROD") preCacheURL = "https://api.usw.digeplan.com/api/precache/folders?product=app&amp;client=" + client + "&amp;originalFolderId=" + altId;
+	if(matches(thisEnv,"NON-PROD")) preCacheURL = "https://api.pre-prod.digeplan.com/api/precache/folders?product=app&amp;client=" + client + "&amp;originalFolderId=" + altId;
+	logDebug("preCacheURL: " + preCacheURL);
+	
+	soapresp = aa.util.httpPost(preCacheURL,'').getOutput();
+	if(soapresp) logDebug("&lt;font color='green'&gt;Calling " + thisEnv + " API: " + soapresp + "&lt;/font&gt;");
+	if(!soapresp) logDebug("&lt;font color='red'&gt;COULD NOT REACH DIGEPLAN API&lt;/font&gt;");
+	return soapresp;
 }
 
 function getEnvironment() {
