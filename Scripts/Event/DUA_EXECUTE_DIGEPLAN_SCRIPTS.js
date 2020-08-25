@@ -45,7 +45,7 @@ try {
         updateTask("Review Distribution", "Revisions Received");
         updateAppStatus("Revisions Received", "Update by Document Upload");
     }
-	if (publicUser && matches(appTypeString,'eReview/Building/NA/NA')) {
+	if (publicUser && matches(capStatus, "Pending Applicant") && matches(appTypeString,'eReview/Building/NA/NA')) {
         updateTask("Review Distribution", "Revisions Received");
         updateAppStatus("Revisions Received", "Update by Document Upload");
     }
