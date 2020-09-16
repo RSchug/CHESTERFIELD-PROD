@@ -38,23 +38,16 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,routi
 	}	
 }
 
-//update required reviewTaskArray tasks to reviewTaskResubmittalReceivedStatus - 08/2020 db turned off from Enhancement
+//08/2020 db turned off from Enhancement - update required reviewTaskArray tasks to reviewTaskResubmittalReceivedStatus 
 //if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && exists(wfStatus,resubmittalRoutedStatusArray)) {
 //	updatePlanReviewTasks4Resubmittal(reviewTasksArray,taskStatusArray,reviewTaskResubmittalReceivedStatus); }
 
-/*send email to Applicant on reviewTaskResubmitStatus - business on 05-2020 wanted this turned off
+/*05-2020 business wanted this turned off send email to Applicant on reviewTaskResubmitStatus
 if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && exists(wfTask.toUpperCase(),reviewTasksArray) && wfStatus == reviewTaskResubmitStatus) {
 	emailCorrectionsRequiredNotification(wfTask,wfStatus,wfComment);
 }*/
 
-//update consolidationTask when all required reviewTasksArray tasks have been completed
-if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && exists(wfTask.toUpperCase(),reviewTasksArray) && isTaskActive(consolidationTask) && checkForPendingReviews(reviewTasksArray,reviewTaskStatusPendingArray) == false) {
-	updateTask(consolidationTask,"Ready for Consolidation","","");
-//db updated per buisness request 4-27-2020	
-        //emailReviewConsolidationNotification();
-}
-
-//send email to Applicant on consolidationTask/consolidationResubmitStatus or consolidationTask/ApprovedStatus and update type to Comment
+//send email to Applicant on consolidationTask/consolidationResubmitStatus or consolidationTask/ApprovedStatus and update type to Comments
 if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && wfTask == consolidationTask && matches(wfStatus,ResubmitStatus,ApprovedStatus)) {
 	emailReviewCompleteNotification(ResubmitStatus,ApprovedStatus,docGroupArrayModule);
 //Update the mark up report to Comment Doc Type
@@ -103,3 +96,12 @@ if(edrPlansExist(docGroupArrayModule,docTypeArrayModule) && matches(wfTask,conso
 synchronizeDocFileNames();
 
 /*-----END DIGEPLAN EDR SCRIPTS-----*/
+
+/*-----START SCRIPTS OUTSIDE OF EDR-----*/
+
+//update consolidationTask when all required reviewTasksArray tasks have been completed
+if(exists(wfTask.toUpperCase(),reviewTasksArray) && isTaskActive(consolidationTask) && checkForPendingReviews(reviewTasksArray,reviewTaskStatusPendingArray) == false) {
+	updateTask(consolidationTask,"Ready for Consolidation","Required Reviews are completed. Review Consolidation needs to be prepared.","");
+//db updated per buisness request 4-27-2020	
+        //emailReviewConsolidationNotification();
+}
