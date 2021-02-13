@@ -1,0 +1,5 @@
+/*
+ASA;BUILDING!~!~!RENEWAL.js
+ */
+
+aa.runScript("APPLICATIONSUBMITAFTER4RENEW"); 
