@@ -6,7 +6,7 @@ try {
 			var emailParameters; 
 			emailParameters = aa.util.newHashtable();
 			emailParameters.put("$$RecordID$$", capIDString); 
-			sendNotification("noreply@chesterfield.gov","mbouquin@truepointsolutions.com","jguest@truepointsolutions.com","CONCERN_TRANSPORTATION",emailParameters,fileNames);
+			sendNotification("noreply@chesterfield.gov","transportation@chesterfield.gov","jguest@truepointsolutions.com","CONCERN_TRANSPORTATION",emailParameters,fileNames);
 		}
 	}
 } catch (err) {
