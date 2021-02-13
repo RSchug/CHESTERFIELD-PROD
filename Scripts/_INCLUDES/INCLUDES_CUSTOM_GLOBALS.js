@@ -17,7 +17,7 @@ if(vEventName.equals("FeeEstimateAfter4ACA"))
 //db added 05-2020
 sendDebugEmail = false;                         // Used for debugging ACA Scripts by emailing debug output.
 debugEmailAddress = "";                         // Used for sending out debug Emails for testing purposes.
-if (matches(publicUserID, "PUBLICUSER1182", "PUBLICUSER1202")) {
+if (matches(publicUserID, "PUBLICUSER1182", "PUBLICUSER1202",'PUBLICUSER548393')) {
     showDebug = true;
     if (publicUserEmail && publicUserEmail != "") {
         //publicUserEmail = publicUserEmail.replace("TURNED_OFF", ""); // replace TURNED_OFF since most ACA user emails are turned off in SUPP.
@@ -29,11 +29,16 @@ if (matches(publicUserID, "PUBLICUSER1182", "PUBLICUSER1202")) {
 
 showDebug = false;
 if (currentUserID == "ADMIN") showDebug = true;
+if (currentUserID == "HOBDAYK") showDebug = true;
 if (currentUserID == "KHOBDAY") showDebug = 3;
 if (currentUserID == "DBOUCHER") showDebug = true;
 if (currentUserID == "MBOUQUIN") showDebug = true;
 if (currentUserID == "JGUEST") showDebug = true;
+if (currentUserID == "GUESTJ") showDebug = true;
 if (currentUserID == "TRUEPOINT") showDebug = 3;
+if (currentUserID == "RSCHUG") showDebug = true;
+if (currentUserID == "DHOOPS") showDebug = 3;
+if (currentUserID == "NGRAF") showDebug = 3;
 
 /*------------------------------------------------------------------------------------------------------/
 | END Custom Parameters
