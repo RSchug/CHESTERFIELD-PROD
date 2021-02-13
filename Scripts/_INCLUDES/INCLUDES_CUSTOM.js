@@ -4663,7 +4663,7 @@ function generateSignPostingNumber(fieldName) {
 function generateCommunityCode(ComCodeName) {
     var inActiveCapStatuses = ["Cancelled", "Closed", "Expired", "Withdrawn"];
 
-    for (var i = 46; i < 1000; i++) {
+    for (var i = 35; i < 1000; i++) {
         var ASIValue1 = '0'+i;
         var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(ComCodeName, ASIValue1);
         if (!getCapResult.getSuccess()) { logDebug("**ERROR: getting caps by app type: " + getCapResult.getErrorMessage()); return null }
@@ -4684,7 +4684,7 @@ function generateCommunityCode(ComCodeName) {
 function generateSubdivCode(SubCodeName) {
     var inActiveCapStatuses = ["Cancelled", "Closed", "Expired", "Withdrawn"];
 
-    for (var i = 8290; i < 100000; i++) {
+    for (var i = 930; i < 100000; i++) {
         var ASIValue2 = '0'+i;
         var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(SubCodeName, parseInt(ASIValue2));
         if (!getCapResult.getSuccess()) { logDebug("**ERROR: getting caps by app type: " + getCapResult.getErrorMessage()); return null }
@@ -4705,7 +4705,7 @@ function generateSubdivCode(SubCodeName) {
 function generateDevCode(DevCodeName) {
     var inActiveCapStatuses = ["Cancelled", "Closed", "Expired", "Withdrawn"];
 
-    for (var i = 10; i < 100000; i++) {
+    for (var i = 4480; i < 100000; i++) {
         var ASIValue3 = '000'+i;
         var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(DevCodeName, ASIValue3);
         if (!getCapResult.getSuccess()) { logDebug("**ERROR: getting caps by app type: " + getCapResult.getErrorMessage()); return null }
@@ -4726,8 +4726,8 @@ function generateDevCode(DevCodeName) {
 function generateSecCode(SecCodeName) {
     var inActiveCapStatuses = ["Cancelled", "Closed", "Expired", "Withdrawn"];
 
-    for (var i = 10; i < 10000; i++) {
-        var ASIValue4 = '00'+i;
+    for (var i = 1; i < 100; i++) {
+        var ASIValue4 = '0'+i;
         var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(SecCodeName, ASIValue4);
         if (!getCapResult.getSuccess()) { logDebug("**ERROR: getting caps by app type: " + getCapResult.getErrorMessage()); return null }
         var apsArray = getCapResult.getOutput();

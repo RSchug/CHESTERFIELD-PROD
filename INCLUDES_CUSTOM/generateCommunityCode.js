@@ -1,7 +1,7 @@
 function generateCommunityCode(ComCodeName) {
     var inActiveCapStatuses = ["Cancelled", "Closed", "Expired", "Withdrawn"];
 
-    for (var i = 46; i < 1000; i++) {
+    for (var i = 35; i < 1000; i++) {
         var ASIValue1 = '0'+i;
         var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(ComCodeName, ASIValue1);
         if (!getCapResult.getSuccess()) { logDebug("**ERROR: getting caps by app type: " + getCapResult.getErrorMessage()); return null }

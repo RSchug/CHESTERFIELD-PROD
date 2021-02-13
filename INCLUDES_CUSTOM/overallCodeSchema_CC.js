@@ -89,13 +89,11 @@ try {
 			seq4CodeName = "Section Code";
 			if (seq4CodeName && typeof(AInfo[SecCodeName]) != "undefined") {
 				AInfo[SecCodeName] = generateSecCode(SecCodeName);
-				if (AInfo[SecCodeName] < 100) {
-					AInfo[SecCodeName] = '00' + AInfo[SecCodeName];
-				} else if (AInfo[SecCodeName] < 1000) {
+				if (AInfo[SecCodeName] < 10) {
 					AInfo[SecCodeName] = '0' + AInfo[SecCodeName];
-				} else if (AInfo[SecCodeName] < 10000) {
+				} else if (AInfo[SecCodeName] < 100) {
 					AInfo[SecCodeName] = AInfo[SecCodeName];
-				} else if (AInfo[SecCodeName] > 10000) {
+				} else if (AInfo[SecCodeName] > 100) {
 					AInfo[SecCodeName] = 'Incorrect Code Vaule';
 				}
 				logDebug(SecCodeName + ": " + AInfo[SecCodeName]);

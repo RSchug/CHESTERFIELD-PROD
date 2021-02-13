@@ -1,8 +1,8 @@
 function generateSecCode(SecCodeName) {
     var inActiveCapStatuses = ["Cancelled", "Closed", "Expired", "Withdrawn"];
 
-    for (var i = 10; i < 10000; i++) {
-        var ASIValue4 = '00'+i;
+    for (var i = 1; i < 100; i++) {
+        var ASIValue4 = '0'+i;
         logDebug("Checking " + SecCodeName + " sequence: " + ASIValue4);
         var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(SecCodeName, ASIValue4);
         if (!getCapResult.getSuccess()) { logDebug("**ERROR: getting caps by app type: " + getCapResult.getErrorMessage()); return null }
