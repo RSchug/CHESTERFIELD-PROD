@@ -6,7 +6,7 @@ var paramsEndDt = dateAdd(null,0);
 var fromAddress = "noreply@chesterfield.gov";
 var toAddress = "lackeym@chesterfield.gov";
 var ccAddress = "mbouquin@truepointsolutions.com";
-var reportSubject = "SUPP Daily Gas Releases report for " + paramsStartDt;
+var reportSubject = "Daily Gas Releases report for " + paramsStartDt;
 var reportContent = "Daily Gas Releases report for " + paramsStartDt;
 var aaReportName = "Gas Releases";
                     
