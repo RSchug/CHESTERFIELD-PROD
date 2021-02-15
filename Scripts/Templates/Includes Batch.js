@@ -6,7 +6,7 @@ function isNull(pTestValue, pNewValue) {
 }
 
 function elapsed() {
-	var thisDate = new Date();
+	var thisDate = new Date(aa.util.now());
 	var thisTime = thisDate.getTime();
 	return ((thisTime - startTime) / 1000)
 }
