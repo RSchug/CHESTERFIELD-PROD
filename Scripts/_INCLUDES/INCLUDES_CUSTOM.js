@@ -6397,13 +6397,15 @@ function emailReviewCompleteNotification(ResubmitStatus, ApprovedStatus, docGrou
         }
         sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
     } else {
-        if (applicantEmail == "" && assignedToEmail != "") {
-            var emailTemplate = "WTUA_INTERNAL NOTIFICATION_REVIEWCOMPLETE";
-            sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
-            showMessage = true;
-            comment("There is no applicant email associated to this permit. Permit Coordinator has been notified via email to contact this applicant directly.");
-            showMessage = showMessageDefault;
-        }
+		if (!appMatch("Building/*/*/*")) {
+			if (applicantEmail == "" && assignedToEmail != "") {
+				var emailTemplate = "WTUA_INTERNAL NOTIFICATION_REVIEWCOMPLETE";
+				sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
+				showMessage = true;
+				comment("There is no applicant email associated to this permit. Permit Coordinator has been notified via email to contact this applicant directly.");
+				showMessage = showMessageDefault;
+			}
+		}
     }
 }
 
