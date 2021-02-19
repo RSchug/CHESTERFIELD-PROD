@@ -6942,8 +6942,8 @@ function digEplanPreCache(client,capId)
 
 function getEnvironment() {
                 var environment = "";
-                var acaSite = lookup("ACA_CONFIGS","ACA_SITE");
-                if(acaSite.indexOf("https://aca-prod.accela.com/chesterfield/") == 0) {environment = "PROD";}
+                var acaSite = lookup("ACA_CONFIGS","ACA_SITE").toUpperCase();
+                if(acaSite.indexOf("HTTPS://ACA-PROD.ACCELA.COM/CHESTERFIELD/") == 0) {environment = "PROD";}
 					else {environment = "NON-PROD";}
 
                 return environment;
