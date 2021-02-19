@@ -39,7 +39,7 @@ if (currentUserID == "TRUEPOINT") showDebug = 3;
 if (currentUserID == "RSCHUG") showDebug = true;
 if (currentUserID == "DHOOPS") showDebug = 3;
 if (currentUserID == "NGRAF") showDebug = 3;
-
+if (currentUserID == "GATEKEEPER") showDebug = 3;
 /*------------------------------------------------------------------------------------------------------/
 | END Custom Parameters
 /------------------------------------------------------------------------------------------------------*/
