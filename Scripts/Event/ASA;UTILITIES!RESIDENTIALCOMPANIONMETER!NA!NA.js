@@ -1,7 +1,8 @@
+if (!publicUser) {
 var newTapNumber = Number(lookup("NEW_CONNECTION_SERVICE_NUMBER","SERVICE_NUMBER"));
 var count = 1;
 editAppSpecific("Service Number",lookup("NEW_CONNECTION_SERVICE_NUMBER","SERVICE_NUMBER"));
-editLookup("NEW_CONNECTION_SERVICE_NUMBER","SERVICE_NUMBER",zeroPad(newTapNumber+count,8));
+editLookup("NEW_CONNECTION_SERVICE_NUMBER","SERVICE_NUMBER",zeroPad(newTapNumber+count,8))}
 
 if (!publicUser) performCISLookup()
 //Add Fees//
