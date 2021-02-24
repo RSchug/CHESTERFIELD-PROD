@@ -3,7 +3,7 @@ function generateSignPostingNumber(fieldName) {
     //var ASIValue = getNextSequence(fieldName);
     //if (ASIValue) ASIValue = ASIValue+"";
 
-    for (var i = 300; i < 500; i++) {
+    for (var i = 100; i < 999; i++) {
         var ASIValue = i + "";
         var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(fieldName, ASIValue);
         if (!getCapResult.getSuccess()) { logDebug("**ERROR: getting caps by app type: " + getCapResult.getErrorMessage()); return null }
