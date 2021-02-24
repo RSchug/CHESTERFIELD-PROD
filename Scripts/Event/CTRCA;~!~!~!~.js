@@ -58,7 +58,7 @@ function emailNewPLNapp() {
     var emailParameters = aa.util.newHashtable();
     var fileNames = [];
 
-    //getRecordParams4Notification(emailParameters);
+    getRecordParams4Notification(emailParameters);
     //getAPOParams4Notification(emailParameters);
     //var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
     //acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
