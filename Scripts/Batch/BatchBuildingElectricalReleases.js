@@ -4,9 +4,9 @@ var currentUserID = "ADMIN";
 var paramsStartDt = dateAdd(null,0);                                                       // Start Date for the batch script to select ASI data on.
 var paramsEndDt = dateAdd(null,0); 
 var fromAddress = "noreply@chesterfield.gov";
-var toAddress = "lackeym@chesterfield.gov";
+var toAddress = "lackeym@chesterfield.gov;vera.e.martin@dominionenergy.com;tracey.seamster@sec.coop;susan.zediak@dominionenergy.com;sara.franklin@dom.com;cassina.west@sec.coop;edwina.linaras@dominionenergy.com;angela.lawson@sec.coop;DVPPetersburgInspections@dominionenergy.com";
 var ccAddress = "mbouquin@truepointsolutions.com";
-var reportSubject = "SUPP Daily Electrical Releases report for " + paramsStartDt;
+var reportSubject = "Daily Electrical Releases report for " + paramsStartDt;
 var reportContent = "Daily Electrical Releases report for " + paramsStartDt;
 var aaReportName = "Electrical Releases";
                     
