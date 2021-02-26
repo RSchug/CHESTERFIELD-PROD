@@ -24,13 +24,13 @@ try {
 				if (wfbTask.getActiveFlag() == 'Y') {
 					if (wfaTask == wfbTask.getTaskDescription()) {
 						if (AInfo['Special Consideration'] == 'Expedited') {
-						editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,10,true));
+						editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,14));
 						} else if (AInfo['Special Consideration'] == 'Fast Track') {
-						editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,5,true));
+						editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,7));
 						} else if (AInfo['Special Consideration'] == 'Regular') {
-						editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,15,true));
+						editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,21));
 						}
-					else { editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,15,true)); }
+					else { editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,21)); }
 					}
 				}
 			}

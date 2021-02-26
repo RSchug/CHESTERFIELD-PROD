@@ -49,14 +49,14 @@ try {
 		activateTask("Pre-Application Meeting");
 		deactivateTask('Default');
 	}
-//Set due dates to 3 days out per ELM Due Date Doc
+//Set due dates to 3 days out per ELM Due Date Doc 02-2021 removed the business day feature in dateAdd function
 	if (wfTask == 'Review Distribution' && matches(wfStatus,'Routed for Towers Review','Routed for Residential and Commercial','Routed for Residential Review','Routed for Commercial Review','Routed for Review')) {
 		var workflowTasks = aa.workflow.getTasks(capId).getOutput();
 		for (var i in workflowTasks) {
 			var wfbTask = workflowTasks[i];
 			if (wfbTask.getActiveFlag() == 'Y') {
 				if (wfaTask == wfbTask.getTaskDescription()) {
-					editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,3,true));
+					editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,3));
 				}
 			}
 		}

@@ -1,11 +1,12 @@
 /*------------------------------------------------------------------------------------------------------/
-| Program: LicenseSetAboutToExpire  Trigger: Batch
-| Client : Chesterfield
+| Program: Penalty Fee  Trigger: Batch
+| Client : Chesterfield County, VA
 |
 | Version 1.0 - Base Version. 09/03/2017 - TruePoint Solutions
 | Version 1.1 - Modified criteria and correct syntax errors.  09/10/2017 TJD
+| Version 1.2 - Modified 1/19/2021
 |
-| Script is run to email permit to facilities.
+| Script is run to add Penalty Fees
 |
 | Batch Requirements:
 /------------------------------------------------------------------------------------------------------*/
@@ -32,11 +33,11 @@ var timeExpired = false;                                                        
 var systemUserObj = aa.person.getUser("ADMIN").getOutput();
 var useAppSpecificGroupName = false;                                                    // Use Group name when populating App Specific Info Values
 var senderEmailAddr = "noreply@chesterfield.gov";                                          // Email address of the sender
-var emailAddress = "ngraf@truepointsolutions.com";                                      // Email address of the person who will receive the batch script log information
+var emailAddress = "mbouquin@truepointsolutions.com";                                      // Email address of the person who will receive the batch script log information
 var emailAddress2 = "";                                                                 // CC email address of the person who will receive the batch script log information
 var emailText = ""; 																	// Email body
-var StartDate = "09/01/2019";
-var EndDate = "09/29/2019";                                                                   
+var StartDate = "12/01/2020";
+var EndDate = "12/31/2020";                                                                   
 //Parameter variables
 var paramsOK = true;
 
@@ -50,16 +51,16 @@ var paramsOK = true;
 /------------------------------------------------------------------------------------------------------*/
 
 if (paramsOK) {
-    logMessage("START", "Start of looking for fee CC_GEN_10 Batch Job.");
+    logMessage("START", "Start of looking for Penalty Batch Job.");
 
     var licAboutToExpCnt = aboutExpLics();
 
     logMessage("INFO", "Number of records processed: " + licAboutToExpCnt + ".");
-    logMessage("END", "End of looking for fee CC_GEN_10 Batch Job: Elapsed Time : " + elapsed() + " Seconds.");
+    logMessage("END", "End of looking for Penalty fee Batch Job: Elapsed Time : " + elapsed() + " Seconds.");
 }
 
 if (emailAddress.length)
-    aa.sendMail(senderEmailAddr, emailAddress, emailAddress2, batchJobName + " Results for looking for fee CC_GEN_10", emailText);
+    aa.sendMail(senderEmailAddr, emailAddress, emailAddress2, batchJobName + " Results for Penalty fee", emailText);
 /*------------------------------------------------------------------------------------------------------/
 | <===========END=Main=Loop================>
 /------------------------------------------------------------------------------------------------------*/
@@ -78,7 +79,7 @@ function aboutExpLics() {
 		var capId = aa.cap.getCapID(CAPID).getOutput();
 		var CAPId = aa.cap.getCap(capId).getOutput();
         var customId = CAPId.getCapModel().getAltID();
-		var bal = feeBalanceFromDatetru(StartDate,EndDate,"CC_GEN_10",capId);
+		var bal = feeBalanceFromDatetru(StartDate,EndDate,"REINSPECTION",capId);
 		if(bal > 0)
 		{
 			var feeResult = aa.finance.getFeeItemByCapID(capId).getOutput();
@@ -89,21 +90,21 @@ function aboutExpLics() {
 					var startdate = new Date(StartDate);
 					var enddate = new Date(EndDate);
 					var feecode = feeResult[x].getFeeCod();
-					if( enddate >= applydate && applydate >= startdate && feecode == "CC_GEN_10")
+					if( enddate >= applydate && applydate >= startdate && feecode == "REINSPECTION")
 						{
 							var feenote = feeResult[x].getF4FeeItem().getFeeNotes();
 							var penalty = feeResult[x].getFee() * 0.1;
-							addFeeWithExtraData("CC_GEN_11","CC-BLD-GENERAL","FINAL",Number(penalty),"Y",capId,feenote,"","");
+							addFeeWithExtraData("PENALTY","CC-BLD-ADMIN","FINAL",Number(penalty),"Y",capId,feenote,"","");
 							logDebug("Past due reinspection fee penalty # has been added to " + customId);
 						}
 				}
 			
 			
-			/*var bal = feeBalanceFromDatetru(StartDate,EndDate,"CC_GEN_10",capId);
+			/*var bal = feeBalanceFromDatetru(StartDate,EndDate,"REINSPECTION",capId);
 			var penaltyfeeamnt = bal * 0.1;
-			var notes = getfeenotes(capId,"CC_GEN_10",StartDate,EndDate);
-			//addFee("CC_GEN_11","CC-BLD-GENERAL","FINAL",1,"N",capId);
-			addFeeWithExtraData("CC_GEN_11","CC-BLD-GENERAL","FINAL",penaltyfeeamnt,"Y",capId,notes,"","");
+			var notes = getfeenotes(capId,"REINSPECTION",StartDate,EndDate);
+			//addFee("PENALTY","CC-BLD-ADMIN","FINAL",1,"N",capId);
+			addFeeWithExtraData("PENALTY","CC-BLD-ADMIN","FINAL",penaltyfeeamnt,"Y",capId,notes,"","");
 			//invoiceAllFeestru(capId);
 			logDebug("Past due reinspection fee penalty # has been added to " + customId);*/
 		}
@@ -695,7 +696,7 @@ function invoiceAllFeestru(capid) {
 	for (tFeeNum in targetFees)
 		{
 		targetFee = targetFees[tFeeNum];
-			if (targetFee.status == "NEW" &&  matches(targetFee.code,"CC_GEN_10","CC_GEN_11") )
+			if (targetFee.status == "NEW" &&  matches(targetFee.code,"REINSPECTION","PENALTY") )
 				{
 				feeSeqArray.push(targetFee.sequence);
 				paymentPeriodArray.push(targetFee.period);
@@ -956,7 +957,7 @@ function getcapIdsbyfeecodedaterange()
  var conn = ds.getConnection(); 
  var result = new Array();
  var LIC_SEQ_NBR = "";
- var getSQL = "SELECT DISTINCT b.B1_ALT_ID FROM dbo.F4FEEITEM f inner join dbo.B1PERMIT b on f.SERV_PROV_CODE = b.SERV_PROV_CODE and f.B1_PER_ID1 = b.B1_PER_ID1 and f.B1_PER_ID2 = b.B1_PER_ID2 and f.B1_PER_ID3 = b.B1_PER_ID3 where f.SERV_PROV_CODE = 'CHESTERFIELD' and f.GF_COD = 'CC_GEN_10'"
+ var getSQL = "SELECT DISTINCT b.B1_ALT_ID FROM dbo.F4FEEITEM f inner join dbo.B1PERMIT b on f.SERV_PROV_CODE = b.SERV_PROV_CODE and f.B1_PER_ID1 = b.B1_PER_ID1 and f.B1_PER_ID2 = b.B1_PER_ID2 and f.B1_PER_ID3 = b.B1_PER_ID3 where f.SERV_PROV_CODE = 'CHESTERFIELD' and f.GF_COD = 'REINSPECTION'"
  var sSelect = aa.db.prepareStatement(conn, getSQL);
         var rs= sSelect.executeQuery(); 
  while(rs.next())

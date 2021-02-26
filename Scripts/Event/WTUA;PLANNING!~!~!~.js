@@ -12,13 +12,13 @@ try {
 					if (wfbTask.getActiveFlag() == 'Y') {
 						if (wfaTask == wfbTask.getTaskDescription()) {
 							if (AInfo['Special Consideration'] == 'Expedited') {
-							editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,10,true));
+							editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,14));
 							} else if (AInfo['Special Consideration'] == 'Fast Track') {
-							editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,5,true));
+							editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,7));
 							} else if (AInfo['Special Consideration'] == 'Regular') {
-							editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,15,true));
+							editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,21));
 							}
-						else { editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,15,true)); }
+						else { editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,21)); }
 						}
 					}
 				}
@@ -148,28 +148,29 @@ try {
 		}
 	
 	//09-2020 Boucher per the ELM Planning DueDate Doc and in chart for Admin Review and these record types update ad hoc due dates - and based on Rev Dist. and Routed from above
+	//02-2021 Removed the Business day call on the dateAdd function
 		if (AInfo['Review Type'] == 'Administrative Review') {
 			
 			if (appMatch('*/SitePlan/Major/*') || appMatch('*/SitePlan/Schematics/*')) {
 				if (isTaskActive('Public Notices')) {
-					editTaskDueDate('Public Notices', dateAdd(getTaskDueDate('Review Distribution'),3,true));
+					editTaskDueDate('Public Notices', dateAdd(getTaskDueDate('Review Distribution'),3));
 				}
 				if (isTaskActive('Adjacents')) {
-					editTaskDueDate('Adjacents', dateAdd(getTaskDueDate('Review Distribution'),5,true));
+					editTaskDueDate('Adjacents', dateAdd(getTaskDueDate('Review Distribution'),5));
 				}
 				if (isTaskActive('IVR Message')) {
-					editTaskDueDate('IVR Message', dateAdd(getTaskDueDate('Review Distribution'),6,true));
+					editTaskDueDate('IVR Message', dateAdd(getTaskDueDate('Review Distribution'),6));
 				}
 				if (isTaskActive('Sign Posting')) {
-					editTaskDueDate('Sign Posting', dateAdd(getTaskDueDate('Review Distribution'),7,true));
+					editTaskDueDate('Sign Posting', dateAdd(getTaskDueDate('Review Distribution'),7));
 				}
 			}
 			else if (appMatch('*/Subdivision/ConstructionPlan/*') || appMatch('*/Subdivision/ExceptiontoPreliminary/*') || appMatch('*/Subdivision/OverallConceptualPlan/*') || appMatch('*/Subdivision/Preliminary/*')) {
 				if (isTaskActive('IVR Message')) {
-					editTaskDueDate('IVR Message', dateAdd(getTaskDueDate('Review Distribution'),6,true));
+					editTaskDueDate('IVR Message', dateAdd(getTaskDueDate('Review Distribution'),6));
 				}
 				if (isTaskActive('Sign Posting')) {
-					editTaskDueDate('Sign Posting', dateAdd(getTaskDueDate('Review Distribution'),7,true));
+					editTaskDueDate('Sign Posting', dateAdd(getTaskDueDate('Review Distribution'),7));
 				}
 			}
 		}

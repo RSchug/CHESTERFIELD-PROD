@@ -13,16 +13,14 @@ try {
 		activateTask("GIS-IST Review");
 		activateTask("Water Quality Review");
 		deactivateTask("Default");
-	//Set due dates to 5 days out per ELM Due Date Doc
+	//Set due dates to 5 days out per ELM Due Date Doc 02-2021 removed business day feature in dateAdd function call, it don't work
 	}	
 	if (wfTask == 'Review Distribution' && matches(wfStatus,'Routed for Review','Manual Routing')) {
 		var workflowTasks = aa.workflow.getTasks(capId).getOutput();
 		for (var i in workflowTasks) {
 			var wfbTask = workflowTasks[i];
 			if (wfbTask.getActiveFlag() == 'Y') {
-				if (wfaTask == wfbTask.getTaskDescription()) {
-					editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,5,true));
-				}
+				editTaskDueDate(wfbTask.getTaskDescription(),dateAdd(null,7));
 			}
 		}
 	}
