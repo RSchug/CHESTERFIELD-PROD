@@ -13,7 +13,7 @@ try {
 	}
 	
 	//From eReview
-	if (publicUser && appMatch("Planning/*/*/*") && !matches(capStatus,'Submitted','Pending Applicant',null)) {
+	if (publicUser && appMatch("Planning/*/*/*") && !matches(capStatus,'Submitted','Pending Applicant','Revisions Received',null)) {
 		cancel = true;
 		showMessage = true;
 		comment("<B><font color='red'>Error: You cannot upload a document when the record is " + capStatus + ".</B></font>");
