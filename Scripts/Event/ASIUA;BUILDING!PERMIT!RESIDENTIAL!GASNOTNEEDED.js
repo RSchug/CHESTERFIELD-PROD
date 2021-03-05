@@ -1,4 +1,4 @@
-//Add Fees//
+//Add Fees//REMOVED 3/1/21 NOT NEEDED
 if (AInfo["Nature of Work"] == "New Natural Gas" && (AInfo["Type of Building"] != "Multi-Family Dwelling") && !feeExists("NATURAL")){
 addFee("NATURAL","CC-BLD-RES-GAS","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-GAS","FINAL",1,"Y")}

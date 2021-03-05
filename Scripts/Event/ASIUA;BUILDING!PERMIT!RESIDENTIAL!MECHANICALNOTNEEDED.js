@@ -1,4 +1,4 @@
-//Add Fees//
+//Add Fees//REMOVED ON 3/1/21 AS NOT NEEDED
 if (AInfo["Nature of Work"] == "Fuel tank installation and/or removal or replacement" && !feeExists("FUELTANK")){
 addFee("FUELTANK","CC-BLD-RES-MECH","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-MECH","FINAL",1,"Y")}

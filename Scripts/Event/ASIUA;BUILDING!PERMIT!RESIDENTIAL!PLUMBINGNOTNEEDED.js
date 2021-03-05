@@ -1,4 +1,4 @@
-//Add Fees//
+//Add Fees//REMOVED ON 3/1/21 DUE TO MANUAL ADDING OF FEES OPTION
 if (AInfo["Water or sewer line installation or repair?"] == "Yes" && !feeExists("WATERSEWER")){
 addFee("WATERSEWER","CC-BLD-RES-PLUMB","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-PLUMB","FINAL",1,"Y")}
