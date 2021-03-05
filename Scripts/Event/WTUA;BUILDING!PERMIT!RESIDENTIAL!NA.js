@@ -54,7 +54,7 @@ try {
 				var newCapIdString = getNextChildCapId(capId, newAppTypeString, "-");
 				var newCapRelation = "Child";
 				var srcCapId = capId;
-				var copySections = ["Addresses", "ASI", "ASIT", "Cap Name", "Cap Short Notes", "Conditions", "Contacts", "GIS Objects", "LPs", "Owners", "Parcels","Documents"];
+				var copySections = ["Addresses", "ASI", "ASIT", "Cap Name", "Cap Short Notes", "Contacts", "GIS Objects", "LPs", "Owners", "Parcels","Documents"];
 				var newCapId = createCap_TPS(newAppTypeString, newCapName, newCapIdString, newCapRelation, srcCapId, copySections);
 				if (newCapId) {
 					showMessage = true;
