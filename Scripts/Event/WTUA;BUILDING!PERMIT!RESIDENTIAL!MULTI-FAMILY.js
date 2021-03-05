@@ -10,7 +10,7 @@ if (wfTask == "Application Submittal" && exists(wfStatus, ["Accepted - Plan Revi
     logDebug("Creating Units: " + units);
     var saveCapId = capId;
     for (var uu = 1; uu <= units; uu++) {
-        copySections = ["ASI", "ASIT", "Cap Short Notes", "Conditions", "Contacts", "LPs"]; // Excludes Address,Parcel,Owner, GIS Objects,Additional Info, Cap Detail, Comments, LPs, Detailed Description, Documents, Education, ContEducation, Examination
+        copySections = ["Contacts", "LPs", "Cap Detail", "Detailed Description"]; // Excludes ASI, ASIT, Addresses,Parcels,Owners, GIS Objects,Additional Info, Cap Short Notes, Comments, LPs, Documents, Education, ContEducation, Examination
         var newCapId = createCap_TPS("Building/Unit/NA/NA", capName, null, "Child", capId, copySections); //remove units from capName + " # " + uu,
         comment("New child Building Unit[" + uu + "]: " + (newCapId ? newCapId.getCustomID() : newCapId)
             + " for " + (capId ? capId.getCustomID() : capId));
@@ -30,14 +30,14 @@ if (wfTask == "Review Consolidation" && wfStatus == "Approved" && parentCapId) {
     if (childArray == null || childArray == false) childArray = [];
     for (var uu in childArray) {
         capId = childArray[uu];
-        copySections = ["Addresses", "ASI", "ASIT", "Cap Detail", "Cap Short Notes", "Detailed Description", "Conditions", "Contacts", "GIS Objects", "LPs", "Owners", "Parcels"]; // Excludes Additional Info, Comments, Documents, Education, ContEducation, Examination
+        copySections = ["Addresses", "Cap Detail", "Detailed Description", "Contacts", "GIS Objects", "LPs", "Owners", "Parcels"]; // Excludes ASI, ASIT, Cap Short Notes, Additional Info, Comments, Documents, Education, ContEducation, Examination
         cap = aa.cap.getCap(capId).getOutput();
         newCapName = cap.getSpecialText();
         var newCapId = createCap_TPS("Building/Permit/Residential/NA", newCapName, null, "Child", capId, copySections);
         comment("New child Residential Building: " + (newCapId ? newCapId.getCustomID() : newCapId)
             + " for Unit[" + uu + "]: " + (capId ? capId.getCustomID() : capId) + " " + newCapName);
         capId = newCapId;
-        resultWorkflowTask("Application Submittal", "Accepted - Plan Review Not Required", "Approved as Mult-Family", "")
+        resultWorkflowTask("Application Submittal", "Accepted - Plan Review Not Required", "Approved as Multi-Family", "")
         capId = saveCapId;
     }
     capId = saveCapId;
