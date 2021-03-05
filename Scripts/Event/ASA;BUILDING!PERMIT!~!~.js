@@ -6,11 +6,11 @@ try {
 	logDebug("Updating " + expField + " to " + expDateNew);
 	editAppSpecific(expField, expDateNew);
 
-//update ASI Housing Units based on Additional Info Housing Units
-	if (!publicUser) {
-		editAppSpecific("Number of Units", houseCount);
-	}
-
+//update ASI Housing Units based on Additional Info Housing Units -removed 2/26/21
+//	if (!publicUser) {
+//		editAppSpecific("Number of Units", houseCount);
+//	}
+//
 //If Is a contractor to be determined? is "Yes" then add Licensed Professional Type of "Contractor" and License # of "TBD"//
 	if (AInfo["Is a contractor to be determined?"] == "Yes") {
 		var lpType = "Contractor", lpId = "TBD", lpBoard = null, lpExpirDate = null, lpFirstName = "", lpLastName = "To Be Determined";
