@@ -32,7 +32,7 @@ if (currentUserID == "ADMIN") showDebug = true;
 if (currentUserID == "HOBDAYK") showDebug = true;
 if (currentUserID == "KHOBDAY") showDebug = 3;
 if (currentUserID == "DBOUCHER") showDebug = true;
-//if (currentUserID == "MBOUQUIN") showDebug = true;
+if (currentUserID == "MBOUQUIN") showDebug = true;
 //if (currentUserID == "BRYANS") showDebug = true;
 if (currentUserID == "JGUEST") showDebug = true;
 if (currentUserID == "GUESTJ") showDebug = true;
