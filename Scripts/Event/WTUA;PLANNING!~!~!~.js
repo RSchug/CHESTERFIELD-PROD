@@ -1,5 +1,5 @@
 try {
-//07-2020 Boucher 11p  and 82p - updated per Word Doc on 9-2020
+//07-2020 Boucher 11p  and 82p - updated per Word Doc on 9-2020 - 02-2021 Updated because business days does not work in dateAdd function
 // for all Planning records - updating the Reviewers Due date based on the Special Consideration field, only those active Reviews (can get overwritten by TRC Set Hearing Date)
 	if (matches(wfTask,'Review Distribution') && matches(wfStatus,'Routed for Review','Routed for Commercial Review','Routed for Residential Review','Routed for Residential and Commercial','Routed for Towers Review','Manual Routing')) {
 		if ((appMatch('*/Subdivision/*/*') || appMatch('*/SitePlan/*/*')) && !appMatch('*/*/Minor/*') &&  !appMatch('*/*/Final Plat/*') && !appMatch('*/*/ParcelAcreage/*')) {
