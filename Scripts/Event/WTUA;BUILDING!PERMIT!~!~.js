@@ -1,7 +1,6 @@
 try {
 	//Permit Issuance is Issued than updated Permit Expiration Date to 180 days from system date
-	if ((wfTask == "Permit Issuance" && wfStatus == "Issued") || !exists(capStatus, ["Cancelled","Pending Applicant"])) { 
-		
+	if (wfTask == "Permit Issuance" && wfStatus == "Issued") { 
 	// Update Permit Expiration Date on record, and where appropriate parent and children
 		var expField = "Permit Expiration Date";
 		var expDateNew = jsDateToASIDate(new Date(dateAdd(null, 180)));
