@@ -3,7 +3,7 @@ try {
 	if (publicUser && !matches(capStatus,'Submitted',null)) {
 		if (!isTaskActive("Document Submitted Online")) {
 				addAdHocTask("ADHOC_WF","Document Submitted Online","");
-			if (!appmatch('*/*/Residential/*')) {
+			if (!appMatch('*/*/Residential/*')) {
 				assignTask_CHESTERFIELD("Document Submitted Online", "MCLEHANEYD");
 			}
 		}		
