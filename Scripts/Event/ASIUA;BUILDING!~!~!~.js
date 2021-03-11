@@ -6,7 +6,8 @@ try {
 			var firstParentName = AInfo["Related Record ID"];
 			addParent(firstParentName);
 		}
-	
+//03-2021 db updated for a 1 record update
+    //editAppName('Livingston Apartments Bldg # 1 with Clubhouse');
 } catch (err) {
 		logDebug("A JavaScript Error occurred: " + err.message + " In Line " + err.lineNumber + " of " + err.fileName + " Stack " + err.stack);
 }
