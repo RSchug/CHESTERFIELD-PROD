@@ -35,12 +35,12 @@ if (wfTask == 'Application Submittal' && wfStatus == 'Accepted') {
 	   cancel = true;
 	}
 }
-	//Before Workflow Task 'Permit Issuance' Status is 'Issued' IF Licensed Professional is null then Error: Licensed Professional is Required before Permit Issuance//
-if (wfTask == 'Permit Issuance' && wfStatus == 'Issued') {
-	var lps = getLicenseProf(null, null);
-	if (lps == false || lps.length == 0) {
-		showMessage = true;
-		comment('<font size=small><b>Licensed Professional is required prior to Permit Issuance</b></font>');
-		cancel = true;
-	}
-}
+//Before Workflow Task 'Permit Issuance' Status is 'Issued' IF Licensed Professional is null then Error: Licensed Professional is Required before Permit Issuance// removed requirement on 3/11/2021
+//if (wfTask == 'Permit Issuance' && wfStatus == 'Issued') {
+//	var lps = getLicenseProf(null, null);
+//	if (lps == false || lps.length == 0) {
+//		showMessage = true;
+//		comment('<font size=small><b>Licensed Professional is required prior to Permit Issuance</b></font>');
+//		cancel = true;
+//	}
+//}
