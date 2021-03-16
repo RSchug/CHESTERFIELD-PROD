@@ -75,8 +75,11 @@ function createChildLic(grp, typ, stype, cat, desc)
             }
             // Copy Work Description - This is custom for Sac County
             copyDetailedDescription(capId, newId);
+            
+          //Copy Application Name
+            editAppName(capName,newId); 
 			
-			// Copy License Prof - Added for Chesterfield 11/2020
+			    // Copy License Prof - Added for Chesterfield 11/2020
             copyLicenseProfessional(capId, newId);
 
             //Copy GIS Objects This is ADDED fro SACRAMENTO COUNTY
