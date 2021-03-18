@@ -134,4 +134,9 @@ addFee("PLANNING","CC-BLD-RES","FINAL",1,"Y")}
 if (AInfo["Nature of Work"] == "Tent" && !feeExists("TENT")){
     addFee("TENT","CC-BLD-RES","FINAL",1,"Y");
     updateFee("STATELEVY","CC-BLD-RES","FINAL",1,"Y")}
+
+if (AInfo["Nature of Work"] == "Solar Panel Installation" && !feeExists("STORMEXTREP")){
+addFee("STORMEXTREP","CC-BLD-RES","FINAL",1,"Y");
+updateFee("STATELEVY","CC-BLD-RES","FINAL",1,"Y")}
+
 }
