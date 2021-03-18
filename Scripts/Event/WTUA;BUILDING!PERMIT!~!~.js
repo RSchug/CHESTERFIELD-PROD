@@ -1,6 +1,6 @@
 try {
 	//Permit Issuance is Issued than updated Permit Expiration Date to 180 days from system date
-	if ((wfTask == "Permit Issuance" && wfStatus == "Issued") || (wfTask == "Inactive Permit" && wfStatus == "Cancelled") || (wfTask == "Inactive Permit" && wfStatus == "Extended") || (wfTask == "Inactive Application" && wfStatus == "Cancelled") || (wfTask == "Inactive Application" && wfStatus == "Extended")) { 
+	if ((wfTask == "Permit Issuance" && wfStatus == "Issued") || (wfTask == "Inspections" && wfStatus == "Temporary CO Issued") || (wfTask == "Inactive Permit" && wfStatus == "Cancelled") || (wfTask == "Inactive Permit" && wfStatus == "Extended") || (wfTask == "Inactive Application" && wfStatus == "Cancelled") || (wfTask == "Inactive Application" && wfStatus == "Extended")) { 
 	// Update Permit Expiration Date on record, and where appropriate parent and children
 		var expField = "Permit Expiration Date";
 		var expDateNew = jsDateToASIDate(new Date(dateAdd(null, 180)));
@@ -32,11 +32,11 @@ try {
 	//Temp CO Dates
 	var tempcoexpdate = "Temp CO Expiration Date";
 	var tempcoexpdatenew = jsDateToASIDate(getTaskDueDate("Inspections"));
-	if (wfStatus == 'Temporary CO Issued' && appMatch("Building/Permit/Residential/NA")) {
+	if (matches(wfStatus,'Temporary CO Issued','Temporary CO Requested') && appMatch("Building/Permit/Residential/NA") && !feeExists("TEMPCORES")) {
 	addFee("TEMPCORES","CC-BLD-ADMIN","FINAL",1,"Y");
 	editAppSpecific(tempcoexpdate,tempcoexpdatenew);
 	}
-	if (wfStatus == 'Temporary CO Issued' && appMatch("Building/Permit/Commercial/NA")) {
+	if (matches(wfStatus,'Temporary CO Issued','Temporary CO Requested') && appMatch("Building/Permit/Commercial/NA") && !feeExists("TEMPCO")) {
 		addFee("TEMPCO","CC-BLD-ADMIN","FINAL",1,"Y");
 		editAppSpecific(tempcoexpdate,tempcoexpdatenew);
 	}
