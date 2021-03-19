@@ -3,7 +3,7 @@ if (AInfo["Water or sewer line installation or repair?"] == "Yes" && !feeExists(
 addFee("WATERSEWER","CC-BLD-RES-PLUMB","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-PLUMB","FINAL",1,"Y")}
 
-if (AInfo["Backflow preventor?"] == "Yes" && !feeExists("BACKFLOW")){
+if (AInfo["Nature of Work"] == "Backflow Preventor without Residential Companion Meter" && !feeExists("BACKFLOW")){
 addFee("BACKFLOW","CC-BLD-RES-PLUMB","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-PLUMB","FINAL",1,"Y")}
 
