@@ -11,22 +11,30 @@ if (AInfo["Nature of Work"] == "Heating, venting and air conditioning (HVAC)" &&
 addFee("MANUFACTURED","CC-BLD-RES-MECH","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-MECH","FINAL",1,"Y")}
 
-if (AInfo["HVAC Type of Work"] == "New ductwork only" && !feeExists("DUCTWORK") && AInfo["Type of Building"] != "Mobile or Manufactured Home on Private Property"){
+if ((AInfo["Nature of Work"] != "Mini-Split with Exposed Refrigerant Line" && AInfo["Nature of Work"] != "Mini-Split with Concealed Refrigerant Line") && AInfo["HVAC Type of Work"] == "New ductwork only" && !feeExists("DUCTWORK") && AInfo["Type of Building"] != "Mobile or Manufactured Home on Private Property"){
 addFee("DUCTWORK","CC-BLD-RES-MECH","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-MECH","FINAL",1,"Y")}
 
-if (AInfo["HVAC Type of Work"] == "New system installation" && !feeExists("NEWHVAC") && (AInfo["Type of Building"] != "Mobile or Manufactured Home on Private Property") && (AInfo["Type of Building"] != "Multi-Family Dwelling") ){
+if ((AInfo["Nature of Work"] != "Mini-Split with Exposed Refrigerant Line" && AInfo["Nature of Work"] != "Mini-Split with Concealed Refrigerant Line") && AInfo["HVAC Type of Work"] == "New system installation" && !feeExists("NEWHVAC") && (AInfo["Type of Building"] != "Mobile or Manufactured Home on Private Property") && (AInfo["Type of Building"] != "Multi-Family Dwelling") ){
 addFee("NEWHVAC","CC-BLD-RES-MECH","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-MECH","FINAL",1,"Y")}
 
-if (AInfo["HVAC Type of Work"] == "System replacement with new ductwork" && !feeExists("REPLCNEWDUCT") && AInfo["Type of Building"] != "Mobile or Manufactured Home on Private Property"){
+if ((AInfo["Nature of Work"] != "Mini-Split with Exposed Refrigerant Line" && AInfo["Nature of Work"] != "Mini-Split with Concealed Refrigerant Line") && AInfo["HVAC Type of Work"] == "System replacement with new ductwork" && !feeExists("REPLCNEWDUCT") && AInfo["Type of Building"] != "Mobile or Manufactured Home on Private Property"){
 addFee("REPLCNEWDUCT","CC-BLD-RES-MECH","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-MECH","FINAL",1,"Y")}
 
-if (AInfo["HVAC Type of Work"] == "System replacement without new ductwork" && !feeExists("REPLCNODUCT") && AInfo["Type of Building"] != "Mobile or Manufactured Home on Private Property"){
+if ((AInfo["Nature of Work"] != "Mini-Split with Exposed Refrigerant Line" && AInfo["Nature of Work"] != "Mini-Split with Concealed Refrigerant Line") && AInfo["HVAC Type of Work"] == "System replacement without new ductwork" && !feeExists("REPLCNODUCT") && AInfo["Type of Building"] != "Mobile or Manufactured Home on Private Property"){
 addFee("REPLCNODUCT","CC-BLD-RES-MECH","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-MECH","FINAL",1,"Y")}
 
 if (AInfo["Nature of Work"] == "Heating, venting and air conditioning (HVAC)" && AInfo["HVAC Type of Work"] == "New system installation" && AInfo["Type of Building"] == "Multi-Family Dwelling" && !feeExists("MULTIFAMILY")){
 addFee("MULTIFAMILY","CC-BLD-RES-MECH","FINAL",1,"Y");
+updateFee("STATELEVY","CC-BLD-RES-MECH","FINAL",1,"Y")}
+
+if (AInfo["Nature of Work"] == "Mini-Split with Exposed Refrigerant Line" && !feeExists("DUCTWORK")){
+addFee("DUCTWORK","CC-BLD-RES-MECH","FINAL",1,"Y");
+updateFee("STATELEVY","CC-BLD-RES-MECH","FINAL",1,"Y")}
+
+if (AInfo["Nature of Work"] == "Mini-Split with Concealed Refrigerant Line" && !feeExists("NEWHVAC")){
+addFee("NEWHVAC","CC-BLD-RES-MECH","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-MECH","FINAL",1,"Y")}
