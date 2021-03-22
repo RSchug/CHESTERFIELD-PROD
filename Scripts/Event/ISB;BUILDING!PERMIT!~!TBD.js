@@ -1,12 +1,17 @@
-// Permit must be Issued for ACA and Selectron
-if (publicUser) {
-if (!wasCapStatus(["Issued"])) { //Remove != "Site Visit" as not available in IVR, "Temporary CO Issued" removed as always Issued first
-        showMessage = true;
-        comment('<font size=small><b>Record must be Issued to Schedule Inspection</b></font>');
-        // if (!exists(vEventName, ["InspectionMultipleScheduleAfter", "InspectionMultipleScheduleBefore"])) 
-        cancel = true;
+try {
+//added 03-2021 per business request - Permit must be Issued for ACA
+	if (publicUser) {
+		if (capStatus != "Issued") { 
+			showDebug = false;
+			showMessage = true;
+			comment('<font size=small><b>Record must be Issued to Schedule Inspection</b></font>');
+			cancel = true;
+		}
+	}
+} catch (err) {
+    logDebug("A JavaScript Error occurred: " + err.message + " In Line " + err.lineNumber + " of " + err.fileName + " Stack " + err.stack);
 }
-}
+/*
 // Parent Permit must be Issued for ACA and Selectron
 //if (inspType != "Site Visit") { //removed as not needed for IVR
         var parentAppTypes = null;
@@ -27,4 +32,4 @@ if (!wasCapStatus(["Issued"])) { //Remove != "Site Visit" as not available in IV
                 // if (!exists(vEventName, ["InspectionMultipleScheduleAfter", "InspectionMultipleScheduleBefore"])) 
                 cancel = true;
         }
-}
+} */
