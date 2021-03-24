@@ -8,6 +8,10 @@ if (AInfo["Backflow preventor?"] == "Yes" && !feeExists("BACKFLOW")){
 addFee("BACKFLOW","CC-BLD-RES-PLUMB","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-PLUMB","FINAL",1,"Y")}
 
+if (AInfo["Nature of Work"] == "Backflow Preventor without Residential Companion Meter" && !feeExists("BACKFLOW")){
+addFee("BACKFLOW","CC-BLD-RES-PLUMB","FINAL",1,"Y");
+updateFee("STATELEVY","CC-BLD-RES-PLUMB","FINAL",1,"Y")}
+
 if (AInfo["Nature of Work"] == "New" && AInfo["Type of Building"] == "Single-Family Dwelling" && !feeExists("NEWSFD")){
 addFee("NEWSFD","CC-BLD-RES-PLUMB","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-PLUMB","FINAL",1,"Y")}
@@ -41,6 +45,10 @@ addFee("ROUGHIN","CC-BLD-RES-PLUMB","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-PLUMB","FINAL",1,"Y")}
 
 if (AInfo["Nature of Work"] == "New" && AInfo["Type of Building"] == "Multi-Family Dwelling" && !feeExists("MULTIFAMILY")){
+addFee("MULTIFAMILY","CC-BLD-RES-PLUMB","FINAL",houseCount,"Y");
+updateFee("STATELEVY","CC-BLD-RES-PLUMB","FINAL",1,"Y")}
+
+if (AInfo["Nature of Work"] == "New House" && AInfo["Type of Building"] == "Multi-Family Dwelling" && !feeExists("MULTIFAMILY")){
 addFee("MULTIFAMILY","CC-BLD-RES-PLUMB","FINAL",houseCount,"Y");
 updateFee("STATELEVY","CC-BLD-RES-PLUMB","FINAL",1,"Y")}
 
