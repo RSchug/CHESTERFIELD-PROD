@@ -1,5 +1,5 @@
 try {
-	if (exists(inspResult,["Approved","Corrections Required"]) && inspType.indexOf("Final") < 0) {
+	if (exists(inspResult,["Approved","Corrections Required"])){//removed on 3/24/2021 && inspType.indexOf("Final") < 0
 	// Update Permit Expiration Date on record, and where appropriate parent and children
 	var expField = "Permit Expiration Date";
 	var expDateNew = jsDateToASIDate(new Date(dateAdd(null, 180)));
