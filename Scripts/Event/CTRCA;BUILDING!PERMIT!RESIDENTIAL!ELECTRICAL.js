@@ -39,6 +39,10 @@ if (AInfo["Nature of Work"] == "Generator" && !feeExists("CHANGEREP")){
 addFee("CHANGEREP","CC-BLD-RES-ELEC","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-ELEC","FINAL",1,"Y")}
 
+if (AInfo["Nature of Work"] == "Solar Panels" && !feeExists("CHANGEREP")){
+addFee("CHANGEREP","CC-BLD-RES-ELEC","FINAL",1,"Y");
+updateFee("STATELEVY","CC-BLD-RES-ELEC","FINAL",1,"Y")}
+
 if (AInfo["Nature of Work"] == "New" && AInfo["Type of Building"] == "Multi-Family Dwelling" && !feeExists("MULTIFAMILY")){
 addFee("MULTIFAMILY","CC-BLD-RES-ELEC","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-ELEC","FINAL",1,"Y")}
