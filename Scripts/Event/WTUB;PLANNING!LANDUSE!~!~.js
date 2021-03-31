@@ -1,10 +1,10 @@
 try {
 // Variances BZA
 	if (appMatch('Planning/LandUse/AdminVariance/NA') || appMatch('Planning/LandUse/Variance/NA') || appMatch('Planning/LandUse/SpecialException/NA') || appMatch('Planning/LandUse/Appeal/NA')){    
-		if (matches(wfTask, 'BZA Hearing') && matches(wfStatus,'Approved')) { //Denied removed on 9/23/2020 per request
-			if (AInfo['Conditions'] == null || AInfo['Approved Time Limit'] == null) {
+		if (matches(wfTask, 'BZA Hearing','Administrative Outcome') && matches(wfStatus,'Approved')) { //Denied removed on 9/23/2020 per request
+			if (AInfo['Conditions'] == null) {
 				showMessage = true;
-				comment('You cannot advance this workflow until ALL fields in the <b>Results</b> area of the Data Fields are completely filled in.  Put in zeroes (0) for those fields that do not apply.');
+				comment('You cannot advance this workflow until the Conditions field in the <b>Results</b> area of the Data Fields is filled in.');
 				cancel = true;
 			}
 			if (AInfo['No Time Limit'] != 'CHECKED' && AInfo['Approved Time Limit'] == null) {
@@ -28,15 +28,6 @@ try {
 				cancel = true;
 			}
 			if (appMatch('Planning/LandUse/ManufacturedHomes/NA') && (AInfo['BOS Cash proffers'] == null || AInfo['BOS Complies with plan'] == null)) { 
-				showMessage = true;
-				comment('You cannot advance this workflow until ALL fields in the <b>Results</b> area of the Data Fields are completely filled in.  Put in zeroes (0) for those fields that do not apply.');
-				cancel = true;
-			}
-		}
-	}
-	if (appMatch('Planning/LandUse/AdminVariance/NA')){    
-		if (matches(wfTask, 'Administrative Outcome') && matches(wfStatus,'Approved')) { //Denied removed on 9/23/2020 per request
-			if (AInfo['Conditions'] == null || AInfo['Approved Time Limit'] == null) {
 				showMessage = true;
 				comment('You cannot advance this workflow until ALL fields in the <b>Results</b> area of the Data Fields are completely filled in.  Put in zeroes (0) for those fields that do not apply.');
 				cancel = true;

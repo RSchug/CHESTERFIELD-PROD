@@ -28,25 +28,25 @@ try {
 		if (appMatch('*/LandUse/*/*') && !appMatch('*/LandUse/CertificateofAppropriateness/*') && !appMatch('*/LandUse/WrittenDetermination/*') && !appMatch('*/LandUse/ZoningOpinion/*')) {
 			
 			if (!isTaskActive("Public Notices") && !isTaskComplete_TPS("Public Notices")) {
-				addAdHocTask("ADHOC_WF","Public Notices","");
+				addAdHocTask_TPS("ADHOC_WF","Public Notices","");
 			}
 			if (isTaskComplete_TPS("Public Notices")) {
 				activateTask("Public Notices");
 			}
 			if (!isTaskActive("Adjacents") && !isTaskComplete_TPS("Adjacents")){
-				addAdHocTask("ADHOC_WF","Adjacents","");
+				addAdHocTask_TPS("ADHOC_WF","Adjacents","");
 			}
 			if (isTaskComplete_TPS("Adjacents")) {
 				activateTask("Adjacents");
 			}
 			if (!isTaskActive("IVR Message") && !isTaskComplete_TPS("IVR Message")){
-				addAdHocTask("ADHOC_WF","IVR Message","");
+				addAdHocTask_TPS("ADHOC_WF","IVR Message","");
 			}
 			if (isTaskComplete_TPS("IVR Message")) {
 				activateTask("IVR Message");
 			}			
 			if (!isTaskActive("Sign Posting") && !isTaskComplete_TPS("Sign Posting")){
-				addAdHocTask("ADHOC_WF","Sign Posting","");
+				addAdHocTask_TPS("ADHOC_WF","Sign Posting","");
 			}
 			if (isTaskComplete_TPS("Sign Posting")) {
 				activateTask("Sign Posting");
@@ -54,7 +54,7 @@ try {
 	//Only AdminVariance does not have Maps ad hoc		
 			if (!appMatch('*/*/AdminVariance/*')) {
 				if (!isTaskActive("Maps") && !isTaskComplete_TPS("Maps")){
-					addAdHocTask("ADHOC_WF","Maps","");
+					addAdHocTask_TPS("ADHOC_WF","Maps","");
 				}
 				if (isTaskComplete_TPS("Maps")) {
 					activateTask("Maps");
@@ -62,13 +62,13 @@ try {
 			}
 			if (appMatch('*/*/ZoningCase/*') || appMatch('*/*/SubstantialAccord/*') || appMatch('*/*/HistoricPreservation/*')) {
 				if (!isTaskActive("CPC Staff Report") && !isTaskComplete_TPS("CPC Staff Report")){
-					addAdHocTask("ADHOC_WF","CPC Staff Report","");
+					addAdHocTask_TPS("ADHOC_WF","CPC Staff Report","");
 				}
 				if (isTaskComplete_TPS("CPC Staff Report")) {
 					activateTask("CPC Staff Report");
 				}
 				if (!isTaskActive("BOS Staff Report") && !isTaskComplete_TPS("BOS Staff Report")){
-					addAdHocTask("ADHOC_WF","BOS Staff Report","");
+					addAdHocTask_TPS("ADHOC_WF","BOS Staff Report","");
 				}
 				if (isTaskComplete_TPS("BOS Staff Report")) {
 					activateTask("BOS Staff Report");
@@ -76,7 +76,7 @@ try {
 			}
 			if (appMatch('*/*/ManufacturedHomes/*') || appMatch('*/*/RPAException/*')) {
 				if (!isTaskActive("BOS Staff Report") && !isTaskComplete_TPS("BOS Staff Report")){
-					addAdHocTask("ADHOC_WF","BOS Staff Report","");
+					addAdHocTask_TPS("ADHOC_WF","BOS Staff Report","");
 					activateTask("BOS Hearing");
 				}
 				if (isTaskComplete_TPS("BOS Staff Report")) {
@@ -94,26 +94,26 @@ try {
 		      || appMatch('*/Subdivision/OverallConceptualPlan/*') || appMatch('*/Subdivision/Preliminary/*')) {
 				  
 			if (!isTaskActive("IVR Message") && !isTaskComplete_TPS("IVR Message")){
-				addAdHocTask("ADHOC_WF","IVR Message","");
+				addAdHocTask_TPS("ADHOC_WF","IVR Message","");
 			}
 			if (isTaskComplete_TPS("IVR Message")) {
 				activateTask("IVR Message");
 			}
 			if (!isTaskActive("Sign Posting") && !isTaskComplete_TPS("Sign Posting")){
-				addAdHocTask("ADHOC_WF","Sign Posting","");
+				addAdHocTask_TPS("ADHOC_WF","Sign Posting","");
 			}
 			if (isTaskComplete_TPS("Sign Posting")) {
 				activateTask("Sign Posting");
 			}
 			if (appMatch('*/SitePlan/Major/*') && AInfo['Review Type'] == 'Administrative Review') {
 				if (!isTaskActive("Public Notices") && !isTaskComplete_TPS("Public Notices")) {
-					addAdHocTask("ADHOC_WF","Public Notices","");
+					addAdHocTask_TPS("ADHOC_WF","Public Notices","");
 				}
 				if (isTaskComplete_TPS("Public Notices")) {
 					activateTask("Public Notices");
 				}				
 				if (!isTaskActive("Adjacents") && !isTaskComplete_TPS("Adjacents")){
-					addAdHocTask("ADHOC_WF","Adjacents","");
+					addAdHocTask_TPS("ADHOC_WF","Adjacents","");
 				}
 				if (isTaskComplete_TPS("Adjacents")) {
 					activateTask("Adjacents");
@@ -121,25 +121,25 @@ try {
 			}
 			else if (AInfo['Review Type'] == 'Planning Commission Public Hearing') {
 				if (!isTaskActive("Public Notices") && !isTaskComplete_TPS("Public Notices")) {
-					addAdHocTask("ADHOC_WF","Public Notices","");
+					addAdHocTask_TPS("ADHOC_WF","Public Notices","");
 				}
 				if (isTaskComplete_TPS("Public Notices")) {
 					activateTask("Public Notices");
 				}				
 				if (!isTaskActive("Adjacents") && !isTaskComplete_TPS("Adjacents")){
-					addAdHocTask("ADHOC_WF","Adjacents","");
+					addAdHocTask_TPS("ADHOC_WF","Adjacents","");
 				}
 				if (isTaskComplete_TPS("Adjacents")) {
 					activateTask("Adjacents");
 				}
 				if (!isTaskActive("Maps") && !isTaskComplete_TPS("Maps")){
-					addAdHocTask("ADHOC_WF","Maps","");
+					addAdHocTask_TPS("ADHOC_WF","Maps","");
 				}
 				if (isTaskComplete_TPS("Maps")) {
 					activateTask("Maps");
 				}
 				if (!isTaskActive("CPC Staff Report") && !isTaskComplete_TPS("CPC Staff Report")){
-					addAdHocTask("ADHOC_WF","CPC Staff Report","");
+					addAdHocTask_TPS("ADHOC_WF","CPC Staff Report","");
 				}
 				if (isTaskComplete_TPS("CPC Staff Report")) {
 					activateTask("CPC Staff Report");
@@ -392,25 +392,25 @@ try {
 		      || appMatch('*/Subdivision/OverallConceptualPlan/*') || appMatch('*/Subdivision/Preliminary/*')) {
 				  
 			if (!isTaskActive("Public Notices") && !isTaskComplete_TPS("Public Notices")) {
-				addAdHocTask("ADHOC_WF","Public Notices","");
+				addAdHocTask_TPS("ADHOC_WF","Public Notices","");
 			}
 			if (isTaskComplete_TPS("Public Notices")) {
 				activateTask("Public Notices");
 			}				
 			if (!isTaskActive("Adjacents") && !isTaskComplete_TPS("Adjacents")){
-				addAdHocTask("ADHOC_WF","Adjacents","");
+				addAdHocTask_TPS("ADHOC_WF","Adjacents","");
 			}
 			if (isTaskComplete_TPS("Adjacents")) {
 				activateTask("Adjacents");
 			}
 			if (!isTaskActive("Maps") && !isTaskComplete_TPS("Maps")){
-				addAdHocTask("ADHOC_WF","Maps","");
+				addAdHocTask_TPS("ADHOC_WF","Maps","");
 			}
 			if (isTaskComplete_TPS("Maps")) {
 				activateTask("Maps");
 			}
 			if (!isTaskActive("CPC Staff Report") && !isTaskComplete_TPS("CPC Staff Report")){
-				addAdHocTask("ADHOC_WF","CPC Staff Report","");
+				addAdHocTask_TPS("ADHOC_WF","CPC Staff Report","");
 			}
 			if (isTaskComplete_TPS("CPC Staff Report")) {
 				activateTask("CPC Staff Report");
@@ -566,8 +566,8 @@ function emailReadyforPayment() {
     var applicantEmail = "";
 	var applicantName = "";
     var assignedTo = getAssignedToStaff();
-    var assignedToEmail = "";
-    var assignedToFullName = "";
+    var assignedToEmail = "No email";
+    var assignedToFullName = "Not Assigned";
     var contObj = {};
     contObj = getContactArray(capId);
     if (typeof(contObj) == "object") {
@@ -580,7 +580,7 @@ function emailReadyforPayment() {
     addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
 	addParameter(emailParameters, "$$applicantName$$", applicantName);
 
-    if (assignedTo != null) {
+    if (!matches(assignedTo,undefined,"",null)) {
         assignedToFullName = aa.person.getUser(assignedTo).getOutput().getFirstName() + " " + aa.person.getUser(assignedTo).getOutput().getLastName();
         if (!matches(aa.person.getUser(assignedTo).getOutput().getEmail(), undefined, "", null)) {
             assignedToEmail = aa.person.getUser(assignedTo).getOutput().getEmail();
@@ -603,6 +603,37 @@ function emailReadyforPayment() {
 	var emailTemplate = "WTUA_PLANNING_READYFORPAYMENT";
 	sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
     }
+
+function addAdHocTask_TPS(adHocProcess, adHocTask, adHocNote) {
+//adHocProcess must be same as one defined in R1SERVER_CONSTANT
+//adHocTask must be same as Task Name defined in AdHoc Process
+//adHocNote can be variable
+//Optional 4 parameters = Assigned to User ID must match an AA user
+//Optional 5 parameters = CapID
+	var thisCap = capId;
+	var thisUser = currentUserID;
+	if(arguments.length > 3)
+		thisUser = arguments[3]
+	if(arguments.length > 4)
+		thisCap = arguments[4];
+	var userObj = aa.person.getUser(thisUser);
+	if (!userObj.getSuccess())
+	{
+		logDebug("Could not find user to assign to");
+		return false;
+	}
+	var taskObj = aa.workflow.getTasks(thisCap).getOutput()[0].getTaskItem()
+	taskObj.setProcessCode(adHocProcess);
+	taskObj.setTaskDescription(adHocTask);
+	taskObj.setDispositionNote(adHocNote);
+	taskObj.setProcessID(0);
+	//taskObj.setAssignmentDate(aa.util.now());
+	taskObj.setDueDate(null);
+	//taskObj.setAssignedUser(userObj.getOutput());
+	wf = aa.proxyInvoker.newInstance("com.accela.aa.workflow.workflow.WorkflowBusiness").getOutput();
+	wf.createAdHocTaskItem(taskObj);
+	return true;
+} 
 
 /*07-2020 Boucher old 21p 
 	if (matches(wfTask,'Review Consolidation','Community Meeting') && matches(wfStatus,'Move to CPC')) {

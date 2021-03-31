@@ -53,7 +53,7 @@ if(exists(wfTask,consolidationTask) && exists(wfStatus,ResubmitStatus)) {
 				aa.document.updateDocument(docArray[d]);
 				//updateDocPermissionsbyCategory(docArray[d],"Comments");  no work with laserfiche
 				enableToBeResubmit(docArray[d]["documentNo"],["Review Complete-Comments"]);
-				emailReviewCompleteNotification(ResubmitStatus,ApprovedStatus,docGroupArrayModule);
+				//emailReviewCompleteNotification(ResubmitStatus,ApprovedStatus,docGroupArrayModule);
 			}
 			if (!matches(docArray[d]["docStatus"],"Review Complete-Comments","Review Complete")) {
 				if(docArray[d].getAllowActions() != null) disableResubmit(docArray[d].getDocumentNo(),['Revisions Requested']);;

@@ -29,15 +29,31 @@ try {
 			}
 		}
 	}
-	//Temp CO Dates
+	//Temp CO Dates for CO Fees
 	var tempcoexpdate = "Temp CO Expiration Date";
 	var tempcoexpdatenew = jsDateToASIDate(getTaskDueDate("Inspections"));
-	if (matches(wfStatus,'Temporary CO Issued','Temporary CO Requested') && appMatch("Building/Permit/Residential/NA") && !feeExists("TEMPCORES")) {
-	addFee("TEMPCORES","CC-BLD-ADMIN","FINAL",1,"Y");
-	editAppSpecific(tempcoexpdate,tempcoexpdatenew);
-	}
-	if (matches(wfStatus,'Temporary CO Issued','Temporary CO Requested') && appMatch("Building/Permit/Commercial/NA") && !feeExists("TEMPCO")) {
+	if (matches(wfStatus,'Temporary CO Requested') && appMatch("Building/Permit/Residential/NA")) {  // took this out per Becky:  && !feeExists("TEMPCORES")
+		addFee("TEMPCORES","CC-BLD-ADMIN","FINAL",1,"Y");
+		//editAppSpecific(tempcoexpdate,tempcoexpdatenew);
+		}
+	if (matches(wfStatus,'Temporary CO Requested') && appMatch("Building/Permit/Commercial/NA")) { // took this out per Becky:  && !feeExists("TEMPCO")
 		addFee("TEMPCO","CC-BLD-ADMIN","FINAL",1,"Y");
+		//editAppSpecific(tempcoexpdate,tempcoexpdatenew);
+	}
+	//Temp CO Date for editAppSpecific
+	if (matches(wfStatus,'Temporary CO Issued') && appMatch("Building/Permit/Residential/NA") && !feeExists("TEMPCORES")) { 
+		addFee("TEMPCORES","CC-BLD-ADMIN","FINAL",1,"Y");
+		//editAppSpecific(tempcoexpdate,tempcoexpdatenew);
+	}
+	if (matches(wfStatus,'Temporary CO Issued') && appMatch("Building/Permit/Commercial/NA") && !feeExists("TEMPCO")) {
+		addFee("TEMPCO","CC-BLD-ADMIN","FINAL",1,"Y");
+		//editAppSpecific(tempcoexpdate,tempcoexpdatenew);
+	}
+		//Temp CO Date for editAppSpecific
+	if (matches(wfStatus,'Temporary CO Issued') && appMatch("Building/Permit/Residential/NA")) { 
+		editAppSpecific(tempcoexpdate,tempcoexpdatenew);
+	}
+	if (matches(wfStatus,'Temporary CO Issued') && appMatch("Building/Permit/Commercial/NA")) {
 		editAppSpecific(tempcoexpdate,tempcoexpdatenew);
 	}
 	//Variables for the EE Inspector based on Parcel field "Inspection Dist" and Standard Choice 'InspectionAssignmentEnvEngineering'
