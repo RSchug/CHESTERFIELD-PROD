@@ -120,7 +120,16 @@ try {
 			comment("There appears to be Workflow Tasks that are still Active - please close them appropriately.");
 		}
 	}
-	
+//03-2021 added scripting for Code Schema Checking
+	if (appMatch('*/SitePlan/*/*') || appMatch('*/Subdivision/*/*')) {
+		if (matches(wfTask,'CPC Hearing','Case Complete','Review Consolidation') && matches(wfStatus,'County Signatures Complete','Create Conditions and Close Case','Closed','Appeal','Complete','CPC Approved','CPC Approved with Admin Review')) {
+			if (AInfo['Subdivision Code'] == null || AInfo['Subdivision Name'] == null || AInfo['Development Code'] == null || AInfo['Development Name'] == null || AInfo['Community Code'] == null) {
+				showMessage = true;
+				comment('You cannot advance this workflow until the Subdivision, Development, and Community Code fields in the <b>Codes</b> area of the Data Fields are filled in appropriately. If a field is Not Applicable, you can mark it with NA.');
+				cancel = true;
+			}
+		}
+	}
 /*	Could not get this to complete WTUB and then not update the due date in the BOS Hearing
 	if ((appMatch('Planning/LandUse/AdminVariance/NA') || appMatch('Planning/LandUse/Variance/NA') || appMatch('Planning/LandUse/SpecialException/NA') || appMatch('Planning/LandUse/Appeal/NA')) &&
 		matches(wfTask,'Review Consolidation','BZA Staff Report') && matches(wfStatus,'Ready for BZA','Complete') && isTaskActive('BZA Hearing')) {
