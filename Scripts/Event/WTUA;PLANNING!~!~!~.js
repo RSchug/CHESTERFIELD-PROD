@@ -90,7 +90,8 @@ try {
 				}
 			}
 		}
-		else if (appMatch('*/SitePlan/Major/*') || appMatch('*/SitePlan/Schematics/*') || appMatch('*/Subdivision/ConstructionPlan/*') || appMatch('*/Subdivision/ExceptiontoPreliminary/*') 
+	//03-21 Per Greg Allen pulled Construction Plan out of this
+		else if (appMatch('*/SitePlan/Major/*') || appMatch('*/SitePlan/Schematics/*') || appMatch('*/Subdivision/ExceptiontoPreliminary/*') 
 		      || appMatch('*/Subdivision/OverallConceptualPlan/*') || appMatch('*/Subdivision/Preliminary/*')) {
 				  
 			if (!isTaskActive("IVR Message") && !isTaskComplete_TPS("IVR Message")){
@@ -153,39 +154,39 @@ try {
 			
 			if (appMatch('*/SitePlan/Major/*') || appMatch('*/SitePlan/Schematics/*')) {
 				if (isTaskActive('Public Notices')) {
-					editTaskDueDate('Public Notices', dateAdd(getTaskDueDate('Review Distribution'),3));
+					editTaskDueDate('Public Notices', dateAdd(null,3));
 				}
 				if (isTaskActive('Adjacents')) {
-					editTaskDueDate('Adjacents', dateAdd(getTaskDueDate('Review Distribution'),5));
+					editTaskDueDate('Adjacents', dateAdd(null,5));
 				}
 				if (isTaskActive('IVR Message')) {
-					editTaskDueDate('IVR Message', dateAdd(getTaskDueDate('Review Distribution'),6));
+					editTaskDueDate('IVR Message', dateAdd(null,6));
 				}
 				if (isTaskActive('Sign Posting')) {
-					editTaskDueDate('Sign Posting', dateAdd(getTaskDueDate('Review Distribution'),7));
+					editTaskDueDate('Sign Posting', dateAdd(null,7));
 				}
 			}
-			else if (appMatch('*/Subdivision/ConstructionPlan/*') || appMatch('*/Subdivision/ExceptiontoPreliminary/*') || appMatch('*/Subdivision/OverallConceptualPlan/*') || appMatch('*/Subdivision/Preliminary/*')) {
+			else if (appMatch('*/Subdivision/ExceptiontoPreliminary/*') || appMatch('*/Subdivision/OverallConceptualPlan/*') || appMatch('*/Subdivision/ConstructionPlan/*') || appMatch('*/Subdivision/Preliminary/*')) {
 				if (isTaskActive('IVR Message')) {
-					editTaskDueDate('IVR Message', dateAdd(getTaskDueDate('Review Distribution'),6));
+					editTaskDueDate('IVR Message', dateAdd(null,6));
 				}
 				if (isTaskActive('Sign Posting')) {
-					editTaskDueDate('Sign Posting', dateAdd(getTaskDueDate('Review Distribution'),7));
+					editTaskDueDate('Sign Posting', dateAdd(null,7));
 				}
 			}
 		}
 		if (appMatch("*/*/AdminVariance/*")) {	
 			if (isTaskActive('Public Notices')) {
-				editTaskDueDate('Public Notices', dateAdd(getTaskDueDate('Review Distribution'),13));
+				editTaskDueDate('Public Notices', dateAdd(null,13));
 			}
 			if (isTaskActive('Adjacents')) {
-				editTaskDueDate('Adjacents', dateAdd(getTaskDueDate('Review Distribution'),13));
+				editTaskDueDate('Adjacents', dateAdd(null,13));
 			}
 			if (isTaskActive('IVR Message')) {
-				editTaskDueDate('IVR Message', dateAdd(getTaskDueDate('Review Distribution'),13));
+				editTaskDueDate('IVR Message', dateAdd(null,13));
 			}
 			if (isTaskActive('Sign Posting')) {
-				editTaskDueDate('Sign Posting', dateAdd(getTaskDueDate('Review Distribution'),13));
+				editTaskDueDate('Sign Posting', dateAdd(null,14));
 			}
 		}
 	}

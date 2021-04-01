@@ -70,7 +70,7 @@ function emailNewPLNapp() {
 	var applicantName = "";
 
 	var contObj = {};
-    contObj = getContactArrayBefore();
+    contObj = getContactArray();
         for (co in contObj) {
             if (contObj[co]["email"] != null)
                 applicantEmail += contObj[co]["email"] + ";";
