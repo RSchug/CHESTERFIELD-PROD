@@ -22,7 +22,7 @@ try {
 		contObj = getContactArray(capId);
 		if (typeof(contObj) == "object") {
 		for (co in contObj) {
-		if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
+		if (contObj[co]["contactType"] == "Elevator Billing Contact" && contObj[co]["email"] != null)
 		applicantEmail += contObj[co]["email"] + ";";
 		}
 		addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
