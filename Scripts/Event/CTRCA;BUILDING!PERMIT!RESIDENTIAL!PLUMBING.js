@@ -1,5 +1,5 @@
 //Add Fees//
-if (AInfo["Water or sewer line installation or repair?"] == "Yes" && !feeExists("WATERSEWER")){
+if (AInfo["Nature of Work"] == "Water or Sewer Line Replacement" && !feeExists("WATERSEWER")){
 addFee("WATERSEWER","CC-BLD-RES-PLUMB","FINAL",1,"Y");
 updateFee("STATELEVY","CC-BLD-RES-PLUMB","FINAL",1,"Y")}
 
