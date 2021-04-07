@@ -102,7 +102,7 @@ try {
 		} else { logDebug("No applicants for " + capIDString); }
 	}
 	//03-2021 Auto-emails
-	if (matches(wfTask,"Application Submittal","Review Distribution") && wfStatus == "Additional Information Required") { 
+	if (matches(wfTask,"Application Submittal","Review Distribution","Permit Issuance") && wfStatus == "Additional Information Required") { 
 		var emailSendFrom = '';
 		var emailSendTo = "";
 		var emailCC = "";
