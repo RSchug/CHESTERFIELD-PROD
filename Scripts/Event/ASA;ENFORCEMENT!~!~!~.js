@@ -4,7 +4,7 @@ try {
 	
 	var iInspector = assignInspection_CHESTERFIELD(null); // Get Inspector
 	var InspAssignment = null;
-	if (appMatch("Enforcement/Zoning Code Compliance/*/*") || appMatch("Enforcement/Property Maintenance/*/*")){
+	if (appMatch("Enforcement/Zoning Code Compliance/*/*") || appMatch("Enforcement/Property Maintenance/*/*")){  //04-2021 removed || appMatch("Enforcement/Street Light/*/*")
 		if (iInspector && iInspector.getGaUserID()) {
 			InspAssignment = iInspector.getGaUserID();
 			assignCap(InspAssignment);
