@@ -1,10 +1,16 @@
 try {
 //03-2021 Auto-emails
-	if (wfStatus == "Additional Information Required") { 
+	if (matches(wfStatus,"Revisions Requested","Complete","Additional Information Required")) {
+		if (wfStatus == "Additional Information Required") {
+			var emailTemplate = "WTUA_REAL_PROP_ADDITIONAL";
+		}
+		else if (matches(wfStatus,"Revisions Requested","Complete")) {
+			var emailTemplate = "WTUA_REAL_PROP_REVIEWCONSOLIDATION";
+		}
+		
 		var emailSendFrom = '';
 		var emailSendTo = "";
 		var emailCC = "";
-		var emailTemplate = "WTUA_REAL_PROP_ADDITIONAL";
 		var fileNames = [];
 		var emailParameters = aa.util.newHashtable();
 		getRecordParams4Notification(emailParameters);
