@@ -506,8 +506,8 @@ try {
 //for all DigEplan processing
 	loadCustomScript("WTUA_EXECUTE_DIGEPLAN_SCRIPTS_PLAN");
 	
-//Create Conditions from proffers table - 59p - moved here 12/2020 for additional tables
-	if (wfStatus == 'Create Conditions and Close Case') {
+//Create Conditions from proffers table - 59p - moved here 12/2020 for additional tables - 04-2021 update to Status name
+	if (wfStatus == 'Create Conditions') {
 		logDebug("Inside: " + wfStatus);
 		var capParcelResult = aa.parcel.getParcelandAttribute(capId,null);
 		var Parcels = capParcelResult.getOutput().toArray();

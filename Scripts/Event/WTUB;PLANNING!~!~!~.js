@@ -1,7 +1,7 @@
 /*
 Script# 7p
 Purpose : checking for conditions on parcels at each record type and at their final step
-PLEASE BE ADVISED - Code was removed for Building Records.  Added wfStatus of Create Conditions and Close Case will circumvent these scripts
+PLEASE BE ADVISED - Code was removed for Building Records.  Added wfStatus of Create Conditions will circumvent these scripts
  */
 try {
 	if (matches(wfTask, 'BOS Hearing') && matches(wfStatus, 'Approved')) {
@@ -100,7 +100,7 @@ try {
 		}
 	}
 //added this here for the Conditions - the cancel does not work in the WTUA	
-	if (wfStatus == 'Create Conditions and Close Case') {
+	if (wfStatus == 'Create Conditions') {
 		logDebug("WTUB - Inside: " + wfStatus);
 		var capParcelResult = aa.parcel.getParcelandAttribute(capId,null);
 		var Parcels = capParcelResult.getOutput().toArray();
@@ -111,7 +111,7 @@ try {
 		}
 	}
 //Check for all Task complete before closing - db 01-2021
-	if (matches(wfTask,'BOS Hearing','Case Complete','GIS Update') && matches(wfStatus,'Create Conditions and Close Case','Closed','Appeal','Complete')) {
+	if (matches(wfTask,'BOS Hearing','Case Complete','GIS Update') && matches(wfStatus,'Closed','Appeal','Complete')) {
 		var alltaskinfo = allTasksComplete_Local();
 		logDebug("alltaskinfo = " + alltaskinfo);
 		if (allTasksComplete_Local() == false) {
@@ -122,7 +122,7 @@ try {
 	}
 //03-2021 added scripting for Code Schema Checking
 	if (appMatch('*/SitePlan/*/*') || appMatch('*/Subdivision/*/*')) {
-		if (matches(wfTask,'CPC Hearing','Case Complete','Review Consolidation') && matches(wfStatus,'County Signatures Complete','Create Conditions and Close Case','Closed','Appeal','Complete','CPC Approved','CPC Approved with Admin Review')) {
+		if (matches(wfTask,'CPC Hearing','Case Complete','Review Consolidation') && matches(wfStatus,'County Signatures Complete','Create Conditions','Closed','Appeal','Complete','CPC Approved','CPC Approved with Admin Review')) {
 			if (AInfo['Subdivision Code'] == null || AInfo['Subdivision Name'] == null || AInfo['Development Code'] == null || AInfo['Development Name'] == null || AInfo['Community Code'] == null) {
 				showMessage = true;
 				comment('You cannot advance this workflow until the Subdivision, Development, and Community Code fields in the <b>Codes</b> area of the Data Fields are filled in appropriately. If a field is Not Applicable, you can mark it with NA.');
