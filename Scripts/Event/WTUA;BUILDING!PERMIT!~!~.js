@@ -163,71 +163,72 @@ try {
 			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
 		} else { logDebug("No applicants for " + capIDString); }
 	}
-	if (wfTask == "Certificate of Occupancy" && wfStatus == "CO Issued") { 
-		var emailSendFrom = '';
-		var emailSendTo = "";
-		var emailCC = "";
-		var emailTemplate = "WTUA_CONTACT NOTIFICATION_CO";
-		var fileNames = [];
-		var emailParameters = aa.util.newHashtable();
-		getRecordParams4Notification(emailParameters);
-		getAPOParams4Notification(emailParameters);
-		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
-		//getACARecordParam4Notification(emailParameters,acaSite);
-		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
-		addParameter(emailParameters, "$$wfComment$$", wfComment);
-		addParameter(emailParameters, "$$wfStatus$$", wfStatus);
-		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
-		var applicantEmail = "";
-		var contObj = {};
-		contObj = getContactArray(capId);
-		if (typeof(contObj) == "object") {
-			for (co in contObj) {
-				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
-					applicantEmail += contObj[co]["email"] + ";";
-			}
-			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
-		} else { logDebug("No contacts at all for " + capIDString); }
-		if (applicantEmail != "") {
-			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
-		} else { logDebug("No applicants for " + capIDString); }
-	}
-	if (wfTask == "Inspections" && wfStatus == "Temporary CO Issued") { 
-		var emailSendFrom = '';
-		var emailSendTo = "";
-		var emailCC = "";
-		var emailTemplate = "WTUA_CONTACT NOTIFICATION_TEMPCO";
-		var fileNames = [];
-		var emailParameters = aa.util.newHashtable();
-		getRecordParams4Notification(emailParameters);
-		getAPOParams4Notification(emailParameters);
-		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
-		//getACARecordParam4Notification(emailParameters,acaSite);
-		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
-		addParameter(emailParameters, "$$wfComment$$", wfComment);
-		addParameter(emailParameters, "$$wfStatus$$", wfStatus);
-		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
-		var applicantEmail = "";
-		var contObj = {};
-		contObj = getContactArray(capId);
-		if (typeof(contObj) == "object") {
-			for (co in contObj) {
-				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
-					applicantEmail += contObj[co]["email"] + ";";
-			}
-			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
-		} else { logDebug("No contacts at all for " + capIDString); }
-		if (applicantEmail != "") {
-			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
-		} else { logDebug("No applicants for " + capIDString); }
-	}
-	if (wfTask == "Permit Issuance" && wfStatus == "Issued") { 
+	//04-2021 added the designation for Fire Record type
+	if (wfTask == "Permit Issuance" && wfStatus == "Issued" && !appMatch('*/*/*/Fire')) { 
 		var emailSendFrom = '';
 		var emailSendTo = "";
 		var emailCC = "";
 		var emailTemplate = "WTUA_CONTACT NOTIFICATION_APPROVED_BLD";
+		var fileNames = [];
+		var emailParameters = aa.util.newHashtable();
+		getRecordParams4Notification(emailParameters);
+		getAPOParams4Notification(emailParameters);
+		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
+		//getACARecordParam4Notification(emailParameters,acaSite);
+		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
+		addParameter(emailParameters, "$$wfComment$$", wfComment);
+		addParameter(emailParameters, "$$wfStatus$$", wfStatus);
+		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
+		var applicantEmail = "";
+		var contObj = {};
+		contObj = getContactArray(capId);
+		if (typeof(contObj) == "object") {
+			for (co in contObj) {
+				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
+					applicantEmail += contObj[co]["email"] + ";";
+			}
+			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
+		} else { logDebug("No contacts at all for " + capIDString); }
+		if (applicantEmail != "") {
+			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
+		} else { logDebug("No applicants for " + capIDString); }
+	}
+	if (wfTask == "Permit Issuance" && wfStatus == "Issued" && appMatch('*/*/*/Fire')) { 
+		var emailSendFrom = '';
+		var emailSendTo = "";
+		var emailCC = "";
+		var emailTemplate = "WTUA_CONTACT NOTIFICATION_APPROVED_FIRE";
+		var fileNames = [];
+		var emailParameters = aa.util.newHashtable();
+		getRecordParams4Notification(emailParameters);
+		getAPOParams4Notification(emailParameters);
+		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
+		//getACARecordParam4Notification(emailParameters,acaSite);
+		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
+		addParameter(emailParameters, "$$wfComment$$", wfComment);
+		addParameter(emailParameters, "$$wfStatus$$", wfStatus);
+		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
+		var applicantEmail = "";
+		var contObj = {};
+		contObj = getContactArray(capId);
+		if (typeof(contObj) == "object") {
+			for (co in contObj) {
+				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
+					applicantEmail += contObj[co]["email"] + ";";
+			}
+			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
+		} else { logDebug("No contacts at all for " + capIDString); }
+		if (applicantEmail != "") {
+			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
+		} else { logDebug("No applicants for " + capIDString); }
+	}
+  	if (wfTask == "Certificate of Occupancy" && wfStatus == "CO Issued") { 
+		var emailSendFrom = '';
+		var emailSendTo = "";
+		var emailCC = "";
+		var emailTemplate = "WTUA_CONTACT NOTIFICATION_CO";
 		var fileNames = [];
 		var emailParameters = aa.util.newHashtable();
 		getRecordParams4Notification(emailParameters);

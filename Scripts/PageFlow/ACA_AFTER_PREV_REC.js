@@ -356,7 +356,7 @@ if (debug.indexOf("**ERROR") > 0) {
 debugEmailSubject = "";
 debugEmailSubject += (capIDString ? capIDString + " " : "") + vScriptName + " - Debug";
 // Override debugEmailTo for specific Public Users based on email address.
-if (exists(publicUserEmail, ["dboucher@truepointsolutions.com", ""]))
+if (exists(publicUserEmail, ["dboucher@truepointsolutions.com", "bushatos@hotmail.com"]))
     debugEmailTo = "dboucher@truepointsolutions.com";
 else if (publicUserEmail.indexOf("@truepointsolutions.com") >= 0)
     debugEmailTo = publicUserEmail.replace("turned_off", "");
@@ -442,7 +442,7 @@ function loadCapModel(targetCapId) {
     try {
 		if (srcCapId != null) {
 			if (capSections == null)
-				capSections = ["AppName", "ASI", "ASIT", "Contacts", "LPs", "Additional Info"]; //"Addresses", "Parcels", "Owners", "Conditions", "Education", "Continuing Education", "Examination" ] removed 02-2021 based on business request
+				capSections = ["AppName", "CapWorkDes", "ASI", "ASIT", "Contacts", "LPs", "Additional Info"]; //"Addresses", "Parcels", "Owners", "Conditions", "Education", "Continuing Education", "Examination" ] removed 02-2021 based on business request
 
 			logDebug("===== copying ===== from "
 				+ (srcCapId && srcCapId.getCustomID ? srcCapId.getCustomID() : srcCapId) + " to "
@@ -897,7 +897,7 @@ function copyApplicationName(srcCapId, targetCapId) {
     aa.cap.editCapByPK(targetCapModel);
 }
 
-function copyCapDetailInfo(srcCapId, targetCapId) {
+function copyCapDetailInfo(srcCapId, targetCapId) { // not seeing this work - db03-2021
     if (srcCapId != null && targetCapId != null) {
         aa.cap.copyCapDetailInfo(srcCapId, targetCapId);
         logDebug("copying CapDetail: "
@@ -909,9 +909,39 @@ function copyCapDetailInfo(srcCapId, targetCapId) {
 function copyCapWorkDesInfo(srcCapId, targetCapId) {
     if (srcCapId != null && targetCapId != null) {
         aa.cap.copyCapWorkDesInfo(srcCapId, targetCapId);
-        logDebug("copying Work Desc: "
-            + (srcCapId && srcCapId.getCustomID ? srcCapId.getCustomID() : srcCapId) + " to "
-            + (targetCapId && targetCapId.getCustomID ? targetCapId.getCustomID() : targetCapId));
+
+	//db added for planning 03-2021
+		//get the source record Assigned to User
+		capDetail = aa.cap.getCapDetail(srcCapId).getOutput();
+		userObj = aa.person.getUser(capDetail.getAsgnStaff());
+		if (userObj.getSuccess()) {
+			staff = userObj.getOutput();
+			userID = staff.getUserID();
+			logDebug("userID: " + userID);
+		}
+		//set the target record to the assigned to
+		var cdScriptObjResult = aa.cap.getCapDetail(targetCapId);
+		if (!cdScriptObjResult.getSuccess())
+			{ logDebug("**ERROR: No cap detail script object : " + cdScriptObjResult.getErrorMessage()) ; return false; }
+		var cdScriptObj = cdScriptObjResult.getOutput();
+		if (!cdScriptObj)
+			{ logDebug("**ERROR: No cap detail script object") ; return false; }
+		cd = cdScriptObj.getCapDetailModel();
+		iNameResult  = aa.person.getUser(userID);
+		if (!iNameResult.getSuccess())
+			{ logDebug("**ERROR retrieving user model " + userID + " : " + iNameResult.getErrorMessage()) ; return false ; }
+		iName = iNameResult.getOutput();
+		cd.setAsgnDept(iName.getDeptOfUser());
+		cd.setAsgnStaff(userID);
+		cdWrite = aa.cap.editCapDetail(cd)
+		if (cdWrite.getSuccess())
+			{ logDebug("Assigned CAP to " + userID) }
+		else
+			{ logDebug("**ERROR writing capdetail : " + cdWrite.getErrorMessage()) ; return false ; }
+			
+			logDebug("copying Work Desc: "
+				+ (srcCapId && srcCapId.getCustomID ? srcCapId.getCustomID() : srcCapId) + " to "
+				+ (targetCapId && targetCapId.getCustomID ? targetCapId.getCustomID() : targetCapId));
     }
 }
 
