@@ -164,7 +164,7 @@ try {
 		} else { logDebug("No applicants for " + capIDString); }
 	}
 	//04-2021 added the designation for Fire Record type
-	if (wfTask == "Permit Issuance" && matches(wfStatus,"Issued","Issued - Inspections Required") && !appMatch('*/*/*/Fire')) { 
+	if (wfTask == "Permit Issuance" && matches(wfStatus,"Issued","Issued - Inspections Required","Issued - Inspections Not Required") && !appMatch('*/*/*/Fire')) { 
 		var emailSendFrom = '';
 		var emailSendTo = "";
 		var emailCC = "";
