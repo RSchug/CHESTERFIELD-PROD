@@ -99,6 +99,13 @@ try {
 			invoiceAllFees(capId);
 		}
 	}
+//04-2021
+	if (inspType.equals("Environmental Engineering Final") && matches(inspResult,"Approved","Cancelled")){
+		closeTask("Environmental Engineering Final Inspection","Approved","Updated based on Inspection","");
+	}
+	if (inspType.equals("Environmental Engineering Final") && inspResult.equals("Corrections Required")){
+		updateTask("Environmental Engineering Final Inspection","Corrections Required","Updated based on Inspection","");
+	}
 } catch (err) {
     logDebug("A JavaScript Error occurred: " + err.message + " In Line " + err.lineNumber + " of " + err.fileName + " Stack " + err.stack);
 }
