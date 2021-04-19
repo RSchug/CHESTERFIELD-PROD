@@ -91,7 +91,7 @@ try {
 		var emailSendTo = "";
 		var emailCC = "";
 		var fileNames = [];
-		var emailTemplate = "ISA_PLAN_FINAL_INSPECT";
+		var emailTemplate = "WTUA_CONTACT NOTIFICATION_CORRECTION_BLD";
 		var emailParameters = aa.util.newHashtable();
 		getRecordParams4Notification(emailParameters);
 		getAPOParams4Notification(emailParameters);
