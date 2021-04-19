@@ -85,6 +85,37 @@ try {
 			}
 		}
 	}
+	//04-2021 Adhoc task updated to 'Corrections Required'
+	if (wfTask =='Planning Final Review' && wfStatus == 'Corrections Required'){
+		var emailSendFrom = '';
+		var emailSendTo = "";
+		var emailCC = "";
+		var fileNames = [];
+		var emailTemplate = "ISA_PLAN_FINAL_INSPECT";
+		var emailParameters = aa.util.newHashtable();
+		getRecordParams4Notification(emailParameters);
+		getAPOParams4Notification(emailParameters);
+		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
+		//getACARecordParam4Notification(emailParameters,acaSite);
+		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
+		addParameter(emailParameters, "$$InspectionDate$$", inspSchedDate);
+		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
+		addParameter(emailParameters, "$$wfComment$$", wfComment);
+		var applicantEmail = "";
+		var contObj = {};
+		contObj = getContactArray(capId);
+		if (typeof(contObj) == "object") {
+			for (co in contObj) {
+				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
+					applicantEmail += contObj[co]["email"] + ";";
+			}
+			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
+		} else { logDebug("No contacts at all for " + capIDString); }
+		if (applicantEmail != "") {
+			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
+		} else { logDebug("No applicants for " + capIDString); }
+	}
 } catch (err) {
 	logDebug("A JavaScript Error occurred: " + err.message + " In Line " + err.lineNumber + " of " + err.fileName + " Stack " + err.stack);
 }
