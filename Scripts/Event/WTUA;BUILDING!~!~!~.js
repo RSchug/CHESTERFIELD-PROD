@@ -12,6 +12,10 @@ try {
 	if ((wfTask == "Application Submittal" && (wfStatus == "Accepted - Plan Review Required" || wfStatus == "Accepted - Plan Review Not Required" || wfStatus == "Accepted")) && checkCapForLicensedProfessionalType("Contractor")){
 		createRefLicProfFromLicProfTRU2();
 	}
+//Created Licensed professional on Permit Issuance
+	if ((appMatch("Building/Permit/Residential/*") && (wfTask == "Permit Issuance" && wfStatus == "Issued")) && checkCapForLicensedProfessionalType("Contractor")){
+		createRefLicProfFromLicProfTRU2();
+	}
 //Adhoc task updated to Revision then activate 'Review Distribution' and status of 'Corrections Received'
 	if (wfTask =='Document Submitted Online' && wfStatus == 'Revision'){
 		if (isTaskActive('Review Distribution')){

@@ -71,7 +71,7 @@ try {
 	editAppSpecific(tempcertexpdate,tempcertexpdatenew);
 	}
 	//Email if Payment Due 
-	if (wfTask == "Application Submittal" && wfStatus == "Payment Due"){
+	if (wfStatus == "Payment Due"){
 		var emailSendFrom = '';
 		var emailSendTo = "";
 		var emailCC = "";
