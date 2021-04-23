@@ -68,197 +68,47 @@ try {
 	var tempcertexpdate = "Temporary Certificate Expiration Date";
 	var tempcertexpdatenew = jsDateToASIDate(new Date(dateAdd(null, 30)));
 	if (wfStatus == 'Temporary Certificate Issued' && appMatch("Building/Permit/Elevator/Renewal")) {
-	editAppSpecific(tempcertexpdate,tempcertexpdatenew);
+		editAppSpecific(tempcertexpdate,tempcertexpdatenew);
 	}
+	//Set parm for all the email types below
+	var emailTemplate = "";
+	
 	//Email if Payment Due 
 	if (wfStatus == "Payment Due"){
-		var emailSendFrom = '';
-		var emailSendTo = "";
-		var emailCC = "";
-		var emailTemplate = "WTUA_BLDG_PAYMENT_DUE";
-		var fileNames = [];
-		var emailParameters = aa.util.newHashtable();
-		getRecordParams4Notification(emailParameters);
-		getAPOParams4Notification(emailParameters);
-		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
-		//getACARecordParam4Notification(emailParameters,acaSite);
-		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
-		addParameter(emailParameters, "$$wfComment$$", wfComment);
-		addParameter(emailParameters, "$$wfStatus$$", wfStatus);
-		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
-		var applicantEmail = "";
-		var contObj = {};
-		contObj = getContactArray(capId);
-		if (typeof(contObj) == "object") {
-			for (co in contObj) {
-				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
-					applicantEmail += contObj[co]["email"] + ";";
-			}
-			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
-		} else { logDebug("No contacts at all for " + capIDString); }
-		if (applicantEmail != "") {
-			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
-		} else { logDebug("No applicants for " + capIDString); }
+		emailTemplate = "WTUA_BLDG_PAYMENT_DUE";
 	}
 	//03-2021 Auto-emails
 	if (matches(wfTask,"Application Submittal","Review Distribution","Permit Issuance") && wfStatus == "Additional Information Required") { 
-		var emailSendFrom = '';
-		var emailSendTo = "";
-		var emailCC = "";
-		var emailTemplate = "WTUA_CONTACT NOTIFICATION_ADDITIONAL_BLD";
-		var fileNames = [];
-		var emailParameters = aa.util.newHashtable();
-		getRecordParams4Notification(emailParameters);
-		getAPOParams4Notification(emailParameters);
-		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
-		//getACARecordParam4Notification(emailParameters,acaSite);
-		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
-		addParameter(emailParameters, "$$wfComment$$", wfComment);
-		addParameter(emailParameters, "$$wfStatus$$", wfStatus);
-		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
-		var applicantEmail = "";
-		var contObj = {};
-		contObj = getContactArray(capId);
-		if (typeof(contObj) == "object") {
-			for (co in contObj) {
-				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
-					applicantEmail += contObj[co]["email"] + ";";
-			}
-			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
-		} else { logDebug("No contacts at all for " + capIDString); }
-		if (applicantEmail != "") {
-			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
-		} else { logDebug("No applicants for " + capIDString); }
+		emailTemplate = "WTUA_CONTACT NOTIFICATION_ADDITIONAL_BLD";
 	}
-	if (((appMatch('Building/Permit/Residential/NA') && wfTask == 'Structural Review') || (appMatch('Building/Permit/Residential/Multi-Family') &&  wfTask == 'Structural Review') ||
-		matches(wfTask,"Review Consolidation")) &&  wfStatus == "Corrections Required") { 
-		var emailSendFrom = '';
-		var emailSendTo = "";
-		var emailCC = "";
-		var emailTemplate = "WTUA_CONTACT NOTIFICATION_CORRECTION_BLD";
-		var fileNames = [];
-		var emailParameters = aa.util.newHashtable();
-		getRecordParams4Notification(emailParameters);
-		getAPOParams4Notification(emailParameters);
-		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
-		//getACARecordParam4Notification(emailParameters,acaSite);
-		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
-		addParameter(emailParameters, "$$wfComment$$", wfComment);
-		addParameter(emailParameters, "$$wfStatus$$", wfStatus);
-		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
-		var applicantEmail = "";
-		var contObj = {};
-		contObj = getContactArray(capId);
-		if (typeof(contObj) == "object") {
-			for (co in contObj) {
-				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
-					applicantEmail += contObj[co]["email"] + ";";
-			}
-			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
-		} else { logDebug("No contacts at all for " + capIDString); }
-		if (applicantEmail != "") {
-			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
-		} else { logDebug("No applicants for " + capIDString); }
+	if (wfTask == 'Structural Review' &&  wfStatus == "Corrections Required") {
+		if (appMatch('*/*/Residential/NA') || appMatch('*/*/Residential/Multi-Family')) {
+			emailTemplate = "WTUA_CONTACT NOTIFICATION_CORRECTION_BLD";
+		}
+	}
+	if (wfTask == 'Review Consolidation' &&  wfStatus == "Corrections Required") {
+		if (appMatch('*/*/Residential/NA') || appMatch('*/*/Residential/Multi-Family')) {
+			emailTemplate = "WTUA_CONTACT NOTIFICATION_CORRECTION_BLD";
+		}
 	}
 	//04-2021 added the designation for Fire Record type
 	if (wfTask == "Permit Issuance" && matches(wfStatus,"Issued","Issued - Inspections Required","Issued - Inspections Not Required") && !appMatch('*/*/*/Fire')) { 
-		var emailSendFrom = '';
-		var emailSendTo = "";
-		var emailCC = "";
-		var emailTemplate = "WTUA_CONTACT NOTIFICATION_APPROVED_BLD";
-		var fileNames = [];
-		var emailParameters = aa.util.newHashtable();
-		getRecordParams4Notification(emailParameters);
-		getAPOParams4Notification(emailParameters);
-		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
-		//getACARecordParam4Notification(emailParameters,acaSite);
-		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
-		addParameter(emailParameters, "$$wfComment$$", wfComment);
-		addParameter(emailParameters, "$$wfStatus$$", wfStatus);
-		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
-		var applicantEmail = "";
-		var contObj = {};
-		contObj = getContactArray(capId);
-		if (typeof(contObj) == "object") {
-			for (co in contObj) {
-				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
-					applicantEmail += contObj[co]["email"] + ";";
-			}
-			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
-		} else { logDebug("No contacts at all for " + capIDString); }
-		if (applicantEmail != "") {
-			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
-		} else { logDebug("No applicants for " + capIDString); }
+		emailTemplate = "WTUA_CONTACT NOTIFICATION_APPROVED_BLD";
 	}
 	if (wfTask == "Permit Issuance" && wfStatus == "Issued" && appMatch('*/*/*/Fire')) { 
-		var emailSendFrom = '';
-		var emailSendTo = "";
-		var emailCC = "";
-		var emailTemplate = "WTUA_CONTACT NOTIFICATION_APPROVED_FIRE";
-		var fileNames = [];
-		var emailParameters = aa.util.newHashtable();
-		getRecordParams4Notification(emailParameters);
-		getAPOParams4Notification(emailParameters);
-		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
-		//getACARecordParam4Notification(emailParameters,acaSite);
-		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
-		addParameter(emailParameters, "$$wfComment$$", wfComment);
-		addParameter(emailParameters, "$$wfStatus$$", wfStatus);
-		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
-		var applicantEmail = "";
-		var contObj = {};
-		contObj = getContactArray(capId);
-		if (typeof(contObj) == "object") {
-			for (co in contObj) {
-				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
-					applicantEmail += contObj[co]["email"] + ";";
-			}
-			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
-		} else { logDebug("No contacts at all for " + capIDString); }
-		if (applicantEmail != "") {
-			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
-		} else { logDebug("No applicants for " + capIDString); }
+		emailTemplate = "WTUA_CONTACT NOTIFICATION_APPROVED_FIRE";	
 	}
   	if (wfTask == "Certificate of Occupancy" && wfStatus == "CO Issued") { 
-		var emailSendFrom = '';
-		var emailSendTo = "";
-		var emailCC = "";
-		var emailTemplate = "WTUA_CONTACT NOTIFICATION_CO";
-		var fileNames = [];
-		var emailParameters = aa.util.newHashtable();
-		getRecordParams4Notification(emailParameters);
-		getAPOParams4Notification(emailParameters);
-		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
-		//getACARecordParam4Notification(emailParameters,acaSite);
-		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
-		addParameter(emailParameters, "$$wfComment$$", wfComment);
-		addParameter(emailParameters, "$$wfStatus$$", wfStatus);
-		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
-		var applicantEmail = "";
-		var contObj = {};
-		contObj = getContactArray(capId);
-		if (typeof(contObj) == "object") {
-			for (co in contObj) {
-				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
-					applicantEmail += contObj[co]["email"] + ";";
-			}
-			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
-		} else { logDebug("No contacts at all for " + capIDString); }
-		if (applicantEmail != "") {
-			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
-		} else { logDebug("No applicants for " + capIDString); }
+		emailTemplate = "WTUA_CONTACT NOTIFICATION_CO";	
 	}
 	if (wfTask == "Inspections" && wfStatus == "Amendment Issued") { 
+		emailTemplate = "WTUA_CONTACT NOTIFICATION_AMEND_BLD";		
+	}
+	//Run the email info if there is a template set and it is not the Commercial or Sign Records.
+	if (emailTemplate != "" && !appMatch('*/*/Commercial/*') && !appMatch('*/*/Sign/*')) {
 		var emailSendFrom = '';
 		var emailSendTo = "";
 		var emailCC = "";
-		var emailTemplate = "WTUA_CONTACT NOTIFICATION_AMEND_BLD";
 		var fileNames = [];
 		var emailParameters = aa.util.newHashtable();
 		getRecordParams4Notification(emailParameters);
@@ -276,13 +126,68 @@ try {
 		if (typeof(contObj) == "object") {
 			for (co in contObj) {
 				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
-					applicantEmail += contObj[co]["email"] + ";";
+					applicantEmail += contObj[co]["email"] + "; ";
 			}
 			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
 		} else { logDebug("No contacts at all for " + capIDString); }
+	
 		if (applicantEmail != "") {
 			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
-		} else { logDebug("No applicants for " + capIDString); }
+		} else { logDebug("No Contacts nor LP's for " + capIDString); }
+	}
+	if (wfTask == 'Review Consolidation' &&  wfStatus == "Corrections Required") {
+		if (appMatch('*/*/Commercial/*') || appMatch('*/*/Sign/*')) {
+			emailTemplate = "WTUA_CONTACT NOTIFICATION_CORRECTION_BLD_COM";
+		}
+	}
+	//Run the email info if there is a template set and it is Commercial or Sign Records.
+	if (emailTemplate != "" && (appMatch('*/*/Commercial/*') || appMatch('*/*/Sign/*'))) {
+		var emailSendFrom = '';
+		var emailSendTo = "";
+		var emailCC = "";
+		var fileNames = [];
+		var emailParameters = aa.util.newHashtable();
+		getRecordParams4Notification(emailParameters);
+		getAPOParams4Notification(emailParameters);
+		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
+		//getACARecordParam4Notification(emailParameters,acaSite);
+		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
+		addParameter(emailParameters, "$$wfComment$$", wfComment);
+		addParameter(emailParameters, "$$wfStatus$$", wfStatus);
+		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
+		var applicantEmail = "";
+		var contObj = {};
+		contObj = getContactArray(capId);
+		if (typeof(contObj) == "object") {
+			for (co in contObj) {
+				if (contObj[co]["email"] != null)
+					applicantEmail += contObj[co]["email"] + "; ";
+			}
+			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
+		} else { logDebug("No contacts at all for " + capIDString); }
+	//LP capture - 04-2021
+		var lpEmail = "";
+		var rArray = new Array();
+		licArr = getLicenseProfessional(capId);
+		for (i in licArr) {
+			var lp = new Array();
+			lp["email"] = licArr[i].getEmail();
+			if (lp["email"] != null) {
+				lpEmail += lp["email"] + "; ";
+				/*keep these here for future expansion if needed
+				lp["licType"] = licArr[i].getLicenseType();
+				lp["lastName"] = licArr[i].getContactLastName();
+				lp["firstName"] = licArr[i].getContactFirstName();
+				lp["businessName"] = licArr[i].getBusinessName();  */
+			}
+			else { logDebug("No LP's at all for " + capIDString); }
+			
+			addParameter(emailParameters, "$$lpEmail$$", lpEmail);
+		}
+		if (applicantEmail != "" || lpEmail != "") {
+			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
+		} else { logDebug("No Contacts nor LP's for " + capIDString); }
 	}
 } catch (err) {
 	logDebug("A JavaScript Error occurred: " + err.message + " In Line " + err.lineNumber + " of " + err.fileName + " Stack " + err.stack);

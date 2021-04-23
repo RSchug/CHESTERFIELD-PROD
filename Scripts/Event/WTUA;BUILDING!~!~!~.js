@@ -103,7 +103,7 @@ try {
 		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
 		//getACARecordParam4Notification(emailParameters,acaSite);
 		addParameter(emailParameters, "$$acaRecordUrl$$", getACARecordURL(acaSite));
-		addParameter(emailParameters, "$$InspectionDate$$", inspSchedDate);
+		//addParameter(emailParameters, "$$InspectionDate$$", inspSchedDate);
 		addParameter(emailParameters, "$$ShortNotes$$", getShortNotes());
 		addParameter(emailParameters, "$$wfComment$$", wfComment);
 		var applicantEmail = "";
@@ -111,14 +111,35 @@ try {
 		contObj = getContactArray(capId);
 		if (typeof(contObj) == "object") {
 			for (co in contObj) {
-				if (contObj[co]["contactType"] == "Applicant" && contObj[co]["email"] != null)
+				if (contObj[co]["email"] != null)
 					applicantEmail += contObj[co]["email"] + ";";
 			}
 			addParameter(emailParameters, "$$applicantEmail$$", applicantEmail);
 		} else { logDebug("No contacts at all for " + capIDString); }
-		if (applicantEmail != "") {
+	//LP capture - 04-2021
+		var lpEmail = "";
+		var rArray = new Array();
+		licArr = getLicenseProfessional(capId);
+		for (i in licArr) {
+			var lp = new Array();
+			lp["email"] = licArr[i].getEmail();
+			if (lp["email"] != null) {
+				lpEmail += lp["email"] + "; ";
+				/*keep these here for future expansion if needed
+				lp["licType"] = licArr[i].getLicenseType();
+				lp["lastName"] = licArr[i].getContactLastName();
+				lp["firstName"] = licArr[i].getContactFirstName();
+				lp["businessName"] = licArr[i].getBusinessName();  */
+			}
+			else { logDebug("No LP's at all for " + capIDString); }
+			
+			addParameter(emailParameters, "$$lpEmail$$", lpEmail);
+		}
+		
+		if (applicantEmail != "" || lpEmail != "") {
 			sendNotification(emailSendFrom, emailSendTo, emailCC, emailTemplate, emailParameters, fileNames);
-		} else { logDebug("No applicants for " + capIDString); }
+		} else { logDebug("No Contacts nor LP's for " + capIDString); }
+
 	}
 } catch (err) {
 	logDebug("A JavaScript Error occurred: " + err.message + " In Line " + err.lineNumber + " of " + err.fileName + " Stack " + err.stack);
