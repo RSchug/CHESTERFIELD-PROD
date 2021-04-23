@@ -18,5 +18,6 @@
 | 06/03/2020 Ray Schug Initial Import of existing INCLUDES_CUSTOM from SUPP & PROD
 | 06/10/2020 Ray Schug Added isTaskComplete_TPS
 | 09/08/2020 Boucher updated addParcelStdCondition_TPS so status would be set correctly
+| 04-20-2021 Boucher updated per bad Code Schema coding
 |
 /------------------------------------------------------------------------------------------------------*/

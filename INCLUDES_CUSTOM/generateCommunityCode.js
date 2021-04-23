@@ -2,7 +2,12 @@ function generateCommunityCode(ComCodeName) {
     var inActiveCapStatuses = ["Cancelled", "Closed", "Expired", "Withdrawn"];
 
     for (var i = 35; i < 1000; i++) {
-        var ASIValue1 = '0'+i;
+        var ASIValue1 = i;
+		if (ASIValue1 < 100) {
+			ASIValue1 = '0' + ASIValue1;
+		} else if (AInfo[ComCodeName] < 1000) {
+			ASIValue1 = ASIValue1;
+		}
         var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(ComCodeName, ASIValue1);
         if (!getCapResult.getSuccess()) { logDebug("**ERROR: getting caps by app type: " + getCapResult.getErrorMessage()); return null }
         var apsArray = getCapResult.getOutput();
@@ -17,5 +22,5 @@ function generateCommunityCode(ComCodeName) {
         }
         if (ASIValue1 != null) break
     }
-    return i;
+    return ASIValue1;
 }

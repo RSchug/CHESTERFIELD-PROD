@@ -154,24 +154,24 @@ try {
 			
 			if (appMatch('*/SitePlan/Major/*') || appMatch('*/SitePlan/Schematics/*')) {
 				if (isTaskActive('Public Notices')) {
-					editTaskDueDate('Public Notices', dateAdd(null,3));
+					editTaskDueDate('Public Notices', dateAdd(null,5));
 				}
 				if (isTaskActive('Adjacents')) {
-					editTaskDueDate('Adjacents', dateAdd(null,5));
+					editTaskDueDate('Adjacents', dateAdd(null,14));
 				}
 				if (isTaskActive('IVR Message')) {
-					editTaskDueDate('IVR Message', dateAdd(null,6));
+					editTaskDueDate('IVR Message', dateAdd(null,8));
 				}
 				if (isTaskActive('Sign Posting')) {
-					editTaskDueDate('Sign Posting', dateAdd(null,7));
+					editTaskDueDate('Sign Posting', dateAdd(null,9));
 				}
 			}
 			else if (appMatch('*/Subdivision/ExceptiontoPreliminary/*') || appMatch('*/Subdivision/OverallConceptualPlan/*') || appMatch('*/Subdivision/ConstructionPlan/*') || appMatch('*/Subdivision/Preliminary/*')) {
 				if (isTaskActive('IVR Message')) {
-					editTaskDueDate('IVR Message', dateAdd(null,6));
+					editTaskDueDate('IVR Message', dateAdd(null,8));
 				}
 				if (isTaskActive('Sign Posting')) {
-					editTaskDueDate('Sign Posting', dateAdd(null,7));
+					editTaskDueDate('Sign Posting', dateAdd(null,9));
 				}
 			}
 		}
@@ -217,19 +217,19 @@ try {
 	if (matches(wfTask,'CPC Hearing') && matches(wfStatus,'Set Hearing Date','Set Meeting Date')) {
 		if (appMatch('*/LandUse/ZoningCase/*') || appMatch('*/LandUse/HistoricPreservation/*') || appMatch('*/LandUse/SubstantialAccord/*')) {
 			if (isTaskActive('Maps')) {
-				editTaskDueDate('Maps', dateAdd(getTaskDueDate('CPC Hearing'),-35));
+				editTaskDueDate('Maps', dateAdd(getTaskDueDate('CPC Hearing'),-25));
 			}
 			if (isTaskActive('Public Notices')) {
 				editTaskDueDate('Public Notices', dateAdd(getTaskDueDate('CPC Hearing'),-34));
 			}
 			if (isTaskActive('Adjacents')) {
-				editTaskDueDate('Adjacents', dateAdd(getTaskDueDate('CPC Hearing'),-28));
+				editTaskDueDate('Adjacents', dateAdd(getTaskDueDate('CPC Hearing'),-26));
 			}
 			if (isTaskActive('IVR Message')) {
-				editTaskDueDate('IVR Message', dateAdd(getTaskDueDate('CPC Hearing'),-23));
+				editTaskDueDate('IVR Message', dateAdd(getTaskDueDate('CPC Hearing'),-27));
 			}
 			if (isTaskActive('Sign Posting')) {
-				editTaskDueDate('Sign Posting', dateAdd(getTaskDueDate('CPC Hearing'),-22));
+				editTaskDueDate('Sign Posting', dateAdd(getTaskDueDate('CPC Hearing'),-26));
 			}
 			if (isTaskActive('CPC Staff Report')) {
 				editTaskDueDate('CPC Staff Report', dateAdd(getTaskDueDate('CPC Hearing'),-15));
@@ -266,16 +266,16 @@ try {
 		if (appMatch('*/LandUse/ZoningCase/*') || appMatch('*/LandUse/HistoricPreservation/*') || appMatch('*/LandUse/SubstantialAccord/*')) {
 			
 			if (isTaskActive('Public Notices')) {
-				editTaskDueDate('Public Notices', dateAdd(getTaskDueDate('CPC Hearing'),1));
+				editTaskDueDate('Public Notices', dateAdd(getTaskDueDate('BOS Hearing'),-28));
 			}
 			if (isTaskActive('Adjacents')) {
-				editTaskDueDate('Adjacents', dateAdd(getTaskDueDate('CPC Hearing'),2));
+				editTaskDueDate('Adjacents', dateAdd(getTaskDueDate('BOS Hearing'),-22));
 			}
 			if (isTaskActive('IVR Message')) {
-				editTaskDueDate('IVR Message', dateAdd(getTaskDueDate('CPC Hearing'),6));
+				editTaskDueDate('IVR Message', dateAdd(getTaskDueDate('BOS Hearing'),-22));
 			}
 			if (isTaskActive('BOS Staff Report')) {
-				editTaskDueDate('BOS Staff Report', dateAdd(getTaskDueDate('CPC Hearing'),6));
+				editTaskDueDate('BOS Staff Report', dateAdd(getTaskDueDate('BOS Hearing'),-26));
 			}
 		}
 		else if (appMatch('*/LandUse/ManufacturedHomes/*') || appMatch('*/LandUse/RPAException/*')) {
@@ -298,8 +298,10 @@ try {
 				editTaskDueDate('BOS Staff Report', dateAdd(getTaskDueDate('BOS Hearing'),-26));
 			}	
 		}
-	} else if (matches(wfTask,'BOS Hearing') && matches(wfStatus,'Set Deferral Hearing Date')) {
-		if (appMatch('*/LandUse/ZoningCase/*') || appMatch('*/LandUse/HistoricPreservation/*') || appMatch('*/LandUse/SubstantialAccord/*')) {
+	} 
+	//04-2021 per Business, remove this code and status from configuration and use just Set Hearing Date.
+	/*else if (matches(wfTask,'BOS Hearing') && matches(wfStatus,'Set Deferral Hearing Date')) {
+		if (appMatch('___/LandUse/ZoningCase/*') || appMatch('___/LandUse/HistoricPreservation/*') || appMatch('___/LandUse/SubstantialAccord/*')) {
 			if (isTaskActive('Public Notices')) {
 				editTaskDueDate('Public Notices', dateAdd(getTaskDueDate('BOS Hearing'),-30));
 			}
@@ -313,7 +315,7 @@ try {
 				editTaskDueDate('BOS Staff Report', dateAdd(getTaskDueDate('BOS Hearing'),-26));
 			}
 		}
-	}
+	} */
 	
 //per the ELM Planning Due Dates Doc
 	if (matches(wfTask,'BZA Hearing') && matches(wfStatus,'Set Hearing Date')) {

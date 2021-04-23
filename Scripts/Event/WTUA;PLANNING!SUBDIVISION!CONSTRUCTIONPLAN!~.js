@@ -1,5 +1,5 @@
 try {
-    // Set the Reviewers Tasks per the wfStatus choosen per REVIEW DEPTS FOR ELM Spreadsheet scritp# 60p
+    // Set the Reviewers Tasks per the wfStatus choosen per REVIEW DEPTS FOR ELM Spreadsheet scritp# 60p - 04-2021 removed GIS-EDM
 	if (wfTask == 'Review Distribution' && wfStatus == 'Routed for Review') {
 		activateTask("CDOT Review");
 		activateTask("Environmental Engineering Review");
@@ -8,7 +8,7 @@ try {
 		activateTask("Utilities Review");
 		activateTask("VDOT Review");
 		activateTask("Water Quality Review");
-		activateTask("GIS-EDM Utilities Review");
+		//activateTask("GIS-EDM Utilities Review");
 		deactivateTask("Default");
 	//02-2021 removed business day feature in dateAdd function call, it don't work	
 		var workflowTasks = aa.workflow.getTasks(capId).getOutput();

@@ -67,12 +67,13 @@ try {
 		if (isTaskComplete_TPS("Adjacents")) {
 			activateTask("Adjacents");
 		}
-		if (!isTaskActive("Maps") && !isTaskComplete_TPS("Maps")){
+	//Per the business 04-2021 
+		/*if (!isTaskActive("Maps") && !isTaskComplete_TPS("Maps")){
 			addAdHocTask_TPS("ADHOC_WF","Maps","");
 		}
 		if (isTaskComplete_TPS("Maps")) {
 			activateTask("Maps");
-		}
+		} */
 	}
 // Add Fees
 	if (wfTask == 'Application Submittal' && wfStatus == 'Calculate Fees') {

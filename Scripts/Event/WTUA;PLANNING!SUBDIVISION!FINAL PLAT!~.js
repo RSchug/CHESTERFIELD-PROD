@@ -1,5 +1,5 @@
 try {
-    // Set the Reviewers Tasks per the wfStatus choosen per REVIEW DEPTS FOR ELM Spreadsheet scritp# 60p
+    // Set the Reviewers Tasks per the wfStatus choosen per REVIEW DEPTS FOR ELM Spreadsheet scritp# 60p - 04-2021 removed GIS-EDM
 	if (wfTask == 'Review Distribution' && wfStatus == 'Routed for Review') {
 		activateTask("Budget and Management Review");
 		activateTask("CDOT Review");
@@ -12,7 +12,7 @@ try {
 		activateTask("GIS-IST Review");
 		activateTask("Assessor Review");
 		activateTask("Water Quality Review");
-		activateTask("GIS-EDM Utilities Review");
+		//activateTask("GIS-EDM Utilities Review");
 		deactivateTask("Default");
 	}	
 	if (wfTask == 'Review Distribution' && matches(wfStatus,'Routed for Review','Manual Routing')) {		
@@ -53,11 +53,9 @@ try {
 		copyASIfromParent(capId,recType,'Subdivision Code','Subdivision Code');
 		copyASIfromParent(capId,recType,'Section Code','Section Code');
 	}
-	
 	if (wfTask == 'Application Submittal' && wfStatus == 'Ready for Payment') {
 		invoiceAllFees(capId);
 	}
-	
 	if (matches(wfTask, 'Review Consolidation') && matches(wfStatus, 'Revisions Requested','Submit Signed Plat')) {
 		var BlankExpireDate = AInfo['Expiration Date'];
 		var months = 12 ;

@@ -37,6 +37,7 @@ logDebug("Loading Events>Scripts>INCLUDES_CUSTOM");
 | 12/26/2020 Boucher added new functions for Ref Parcel, Address and Owner to record from table
 | 01-19-2021 Boucher added new function for overallCodeSchema so that it can be called from different events
 | 03-10-2021 Graf added new functions for DPOR functionality and expression
+| 04-20-2021 Boucher updated per bad Code Schema coding
 |
 /------------------------------------------------------------------------------------------------------*/
 //This function activates or deactivates the given wfTask.
@@ -4668,7 +4669,12 @@ function generateCommunityCode(ComCodeName) {
     var inActiveCapStatuses = ["Cancelled", "Closed", "Expired", "Withdrawn"];
 
     for (var i = 35; i < 1000; i++) {
-        var ASIValue1 = '0'+i;
+        var ASIValue1 = i;
+		if (ASIValue1 < 100) {
+			ASIValue1 = '0' + ASIValue1;
+		} else if (AInfo[ComCodeName] < 1000) {
+			ASIValue1 = ASIValue1;
+		}
         var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(ComCodeName, ASIValue1);
         if (!getCapResult.getSuccess()) { logDebug("**ERROR: getting caps by app type: " + getCapResult.getErrorMessage()); return null }
         var apsArray = getCapResult.getOutput();
@@ -4683,14 +4689,21 @@ function generateCommunityCode(ComCodeName) {
         }
         if (ASIValue1 != null) break
     }
-    return i;
+    return ASIValue1;
 }
 function generateSubdivCode(SubCodeName) {
     var inActiveCapStatuses = ["Cancelled", "Closed", "Expired", "Withdrawn"];
 
     for (var i = 930; i < 100000; i++) {
-        var ASIValue2 = '0'+i;
-        var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(SubCodeName, parseInt(ASIValue2));
+        var ASIValue2 = i;
+		if (ASIValue2 < 1000) {
+			ASIValue2 = '00' + ASIValue2;
+		} else if (ASIValue2 < 10000) {
+			ASIValue2 = '0' + ASIValue2;
+		} else if (ASIValue2 < 100000) {
+			ASIValue2 = ASIValue2;
+		}
+        var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(SubCodeName, ASIValue2);
         if (!getCapResult.getSuccess()) { logDebug("**ERROR: getting caps by app type: " + getCapResult.getErrorMessage()); return null }
         var apsArray = getCapResult.getOutput();
         for (aps in apsArray) {
@@ -4704,13 +4717,18 @@ function generateSubdivCode(SubCodeName) {
         }
         if (ASIValue2 != null) break
     }
-    return i;
+    return ASIValue2;
 }
 function generateDevCode(DevCodeName) {
     var inActiveCapStatuses = ["Cancelled", "Closed", "Expired", "Withdrawn"];
 
     for (var i = 4480; i < 100000; i++) {
-        var ASIValue3 = '000'+i;
+        var ASIValue3 = i;
+		if (ASIValue3 < 10000) {
+			ASIValue3 = '0' + ASIValue3;
+		} else if (ASIValue3 < 100000) {
+			ASIValue3 = ASIValue3;
+		}
         var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(DevCodeName, ASIValue3);
         if (!getCapResult.getSuccess()) { logDebug("**ERROR: getting caps by app type: " + getCapResult.getErrorMessage()); return null }
         var apsArray = getCapResult.getOutput();
@@ -4725,13 +4743,18 @@ function generateDevCode(DevCodeName) {
         }
         if (ASIValue3 != null) break
     }
-    return i;
+    return ASIValue3;
 }
 function generateSecCode(SecCodeName) {
     var inActiveCapStatuses = ["Cancelled", "Closed", "Expired", "Withdrawn"];
 
     for (var i = 1; i < 100; i++) {
-        var ASIValue4 = '0'+i;
+        var ASIValue4 = i;
+		if (ASIValue4 < 10) {
+			ASIValue4 = '0' + ASIValue4;
+		} else if (ASIValue4 < 100) {
+			ASIValue4 = ASIValue4;
+		}
         var getCapResult = aa.cap.getCapIDsByAppSpecificInfoField(SecCodeName, ASIValue4);
         if (!getCapResult.getSuccess()) { logDebug("**ERROR: getting caps by app type: " + getCapResult.getErrorMessage()); return null }
         var apsArray = getCapResult.getOutput();
@@ -4746,7 +4769,7 @@ function generateSecCode(SecCodeName) {
         }
         if (ASIValue4 != null) break
     }
-    return i;
+    return ASIValue4;
 }
 
 // FA this method returns all the related caps for given cap, it excludes the given cap in the array
@@ -5548,15 +5571,6 @@ try {
 			seq1CodeName = "Community Code";
 			if (seq1CodeName && typeof(AInfo[ComCodeName]) != "undefined") {
 				AInfo[ComCodeName] = generateCommunityCode(ComCodeName);
-				if (AInfo[ComCodeName] < 10) {
-					AInfo[ComCodeName] = '00' + AInfo[ComCodeName];
-				} else if (AInfo[ComCodeName] < 100) {
-					AInfo[ComCodeName] = '0' + AInfo[ComCodeName];
-				} else if (AInfo[ComCodeName] < 1000) {
-					AInfo[ComCodeName] = AInfo[ComCodeName];
-				} else if (AInfo[ComCodeName] < 1000) {
-					AInfo[ComCodeName] = 'Incorrect Code Value';
-				}
 				logDebug(ComCodeName + ": " + AInfo[ComCodeName]);
 				editAppSpecific(ComCodeName, AInfo[ComCodeName]);
 			}
@@ -5573,17 +5587,6 @@ try {
 			seq2CodeName = "Subdivision Code";
 			if (seq2CodeName && typeof(AInfo[SubCodeName]) != "undefined") {
 				AInfo[SubCodeName] = generateSubdivCode(SubCodeName);
-				if (AInfo[SubCodeName] < 100) {
-					AInfo[SubCodeName] = '000' + AInfo[SubCodeName];
-				} else if (AInfo[SubCodeName] < 1000) {
-					AInfo[SubCodeName] = '00' + AInfo[SubCodeName];
-				} else if (AInfo[SubCodeName] < 10000) {
-					AInfo[SubCodeName] = '0' + AInfo[SubCodeName];
-				} else if (AInfo[SubCodeName] < 100000) {
-					AInfo[SubCodeName] = AInfo[SubCodeName];
-				} else if (AInfo[SubCodeName] > 100000) {
-					AInfo[SubCodeName] = 'Incorrect Code Value';
-				}
 				logDebug(SubCodeName + ": " + AInfo[SubCodeName]);
 				editAppSpecific(SubCodeName, AInfo[SubCodeName]);
 			}
@@ -5599,17 +5602,6 @@ try {
 			seq3CodeName = "Development Code";
 			if (seq3CodeName && typeof(AInfo[DevCodeName]) != "undefined") {
 				AInfo[DevCodeName] = generateDevCode(DevCodeName);
-				if (AInfo[DevCodeName] < 100) {
-					AInfo[DevCodeName] = '000' + AInfo[DevCodeName];
-				} else if (AInfo[DevCodeName] < 1000) {
-					AInfo[DevCodeName] = '00' + AInfo[DevCodeName];
-				} else if (AInfo[DevCodeName] < 10000) {
-					AInfo[DevCodeName] = '0' + AInfo[DevCodeName];
-				} else if (AInfo[DevCodeName] < 100000) {
-					AInfo[DevCodeName] = AInfo[DevCodeName];
-				} else if (AInfo[DevCodeName] > 100000) {
-					AInfo[DevCodeName] = 'Incorrect Code Value';
-				}
 				logDebug(DevCodeName + ": " + AInfo[DevCodeName]);
 				editAppSpecific(DevCodeName, AInfo[DevCodeName]);
 			}
@@ -5625,15 +5617,6 @@ try {
 			seq4CodeName = "Section Code";
 			if (seq4CodeName && typeof(AInfo[SecCodeName]) != "undefined") {
 				AInfo[SecCodeName] = generateSecCode(SecCodeName);
-				if (AInfo[SecCodeName] < 100) {
-					AInfo[SecCodeName] = '00' + AInfo[SecCodeName];
-				} else if (AInfo[SecCodeName] < 1000) {
-					AInfo[SecCodeName] = '0' + AInfo[SecCodeName];
-				} else if (AInfo[SecCodeName] < 10000) {
-					AInfo[SecCodeName] = AInfo[SecCodeName];
-				} else if (AInfo[SecCodeName] > 10000) {
-					AInfo[SecCodeName] = 'Incorrect Code Vaule';
-				}
 				logDebug(SecCodeName + ": " + AInfo[SecCodeName]);
 				editAppSpecific(SecCodeName, AInfo[SecCodeName]);
 			}
