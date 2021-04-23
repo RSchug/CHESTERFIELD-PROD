@@ -95,7 +95,7 @@ try {
 		var emailSendTo = "";
 		var emailCC = "";
 		var fileNames = [];
-		var emailTemplate = "WTUA_CONTACT NOTIFICATION_CORRECTION_BLD";
+		var emailTemplate = "WTUA_CONTACT NOTIFICATION_CORRECTION_BLD_COM";
 		var emailParameters = aa.util.newHashtable();
 		getRecordParams4Notification(emailParameters);
 		getAPOParams4Notification(emailParameters);
