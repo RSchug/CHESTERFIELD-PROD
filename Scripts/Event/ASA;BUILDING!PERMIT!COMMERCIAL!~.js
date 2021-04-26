@@ -19,4 +19,9 @@ if (!publicUser) {
     if (appMatch("Building/Permit/Commercial/Plumbing")){
     addFee("PLUMBING","CC-BLD-COMM-MEP","FINAL",1,"Y");
     addFee("STATELEVY","CC-BLD-COMM-MEP","FINAL",1,"Y");
-    }}
+    }
+    if (appMatch("Building/Permit/Commercial/Fire")){
+    addFee("FIRE","CC-BLD-COMM-FIRE","FINAL",1,"Y");
+    addFee("STATELEVY","CC-BLD-COMM-FIRE","FINAL",1,"Y");
+    }
+}
